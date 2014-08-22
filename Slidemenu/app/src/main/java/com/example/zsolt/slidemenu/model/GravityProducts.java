@@ -6,7 +6,7 @@ package com.example.zsolt.slidemenu.model;
 public class GravityProducts {
     private String productTitle;
     private String productBody;
-    private float productPrice;
+    private long productPrice;
     private String productImageUrl;
     private String productRegion;
     private long productUpdateTimeStamp;
@@ -16,7 +16,7 @@ public class GravityProducts {
     public GravityProducts() {
     }
 
-    public GravityProducts(String productItemId, String productTitle, String productBody, float productPrice, long productUpdateTimeStamp, String productItemType, String productImageUrl, String productRegion) {
+    public GravityProducts(String productItemId, String productTitle, String productBody, long productPrice, long productUpdateTimeStamp, String productItemType, String productImageUrl, String productRegion) {
         this.productItemId =
         this.productTitle = productTitle;
         this.productBody = productBody;
@@ -41,7 +41,7 @@ public class GravityProducts {
         this.productBody = productBody;
     }
 
-    public void setProductPrice(float productPrice) {
+    public void setProductPrice(long productPrice) {
         this.productPrice = productPrice;
     }
 
@@ -69,7 +69,7 @@ public class GravityProducts {
         return productBody;
     }
 
-    public float getProductPrice() {
+    public long getProductPrice() {
         return productPrice;
     }
 

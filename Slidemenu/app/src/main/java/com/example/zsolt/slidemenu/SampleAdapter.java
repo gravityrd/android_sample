@@ -69,7 +69,6 @@ public class SampleAdapter extends BaseAdapter{
         holder.priceProduct.setText(details.get(position).getProductPrice() + "HUF");
         String tempImg;
         tempImg = details.get(position).getProductImageUrl();
-        tempImg.replace("thumbs","images");
         imageLoader.displayImage(tempImg,holder.imageProduct);
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override

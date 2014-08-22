@@ -37,7 +37,7 @@ public class Client {
         recomandationContext.scenarioId = scenario;
         recomandationContext.numberLimit = count;
         recomandationContext.recommendationTime = (int) (System.currentTimeMillis() / 1000);
-        recomandationContext.resultNameValues = new String[]{"Title", "body","image","ItemType","price","region","updateTimeStamp"};
+        recomandationContext.resultNameValues = new String[]{"Title", "body","image","ItemType","price","region","updateTimeStamp", "itemId"};
         GravityItemRecommendation itemRecommendation = null;
         try {
             itemRecommendation = client.getItemRecommendation(userID, cookieID, recomandationContext);
@@ -60,22 +60,22 @@ public class Client {
                         product.setProductTitle(itemNameValue.value);
                     }
                     if(itemNameValue.name.equalsIgnoreCase("body")){
-                        product.setProductBody(itemNameValue.name);
+                        product.setProductBody(itemNameValue.value);
                     }
                     if(itemNameValue.name.equalsIgnoreCase("image")){
-                        product.setProductImageUrl(itemNameValue.name);
+                        product.setProductImageUrl(itemNameValue.value.replace("thumbs","images"));
                     }
                     if(itemNameValue.name.equalsIgnoreCase("ItemType")){
-                        product.setProductItemType(itemNameValue.name);
+                        product.setProductItemType(itemNameValue.value);
                     }
                     if(itemNameValue.name.equalsIgnoreCase("region")){
-                        product.setProductRegion(itemNameValue.name);
+                        product.setProductRegion(itemNameValue.value);
                     }
                     if(itemNameValue.name.equalsIgnoreCase("price")){
-                        product.setProductRegion(itemNameValue.name);
+                        product.setProductPrice(Long.parseLong(itemNameValue.value));
                     }
                     if(itemNameValue.name.equalsIgnoreCase("updateTimeStamp")){
-                        product.setProductRegion(itemNameValue.name);
+                        product.setProductUpdateTimeStamp(Long.parseLong(itemNameValue.value));
                     }
                 }
                 gravityProductsList.add(product);
@@ -113,7 +113,6 @@ public class Client {
                 for (GravityNameValue itemNameValue: itemNameValues){
                     if(itemNameValue.name.equalsIgnoreCase("itemId")){
                         product.setProductItemId(itemNameValue.value);
-                       Log.i("Homefragment",itemNameValue.value);
                     }
                     if(itemNameValue.name.equalsIgnoreCase("Title")){
                         product.setProductTitle(itemNameValue.value);
@@ -170,9 +169,7 @@ public class Client {
 
                 for (GravityNameValue itemNameValue : itemNameValues) {
                     if (itemNameValue.name.equalsIgnoreCase("ItemType")) {
-                        temp = String.valueOf((itemNameValue.name).charAt(0));
-                        Log.i(temp,"nem");
-                        System.out.println(temp);
+                        temp = String.valueOf((itemNameValue.value).charAt(0));
                     }
                     categoryRecomandation[count] = temp;
                     count++;

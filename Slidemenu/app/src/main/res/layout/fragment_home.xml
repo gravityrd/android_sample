@@ -857,7 +857,7 @@
                     android:scaleType="centerCrop"
                     android:paddingTop="2dp"
                     android:layout_marginLeft="3dp"
-                    android:src="@drawable/kat1_ingatlan"
+                    android:src="@drawable/kat9_egyebb"
                     android:clickable="false"/>
                 <LinearLayout
                     android:layout_width="match_parent"

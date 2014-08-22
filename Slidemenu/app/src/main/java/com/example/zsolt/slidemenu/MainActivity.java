@@ -43,12 +43,6 @@ public class MainActivity extends Activity {
 
     // slide menu items
     private String[] navMenuTitles;
-    private TypedArray navMenuIcons;
-
-    private ArrayList<NavDrawerItem> navDrawerItems;
-    private NavDrawerListAdapter adapter;
-
-
 
 
     @Override
@@ -56,8 +50,9 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
-        navMenuIcons = getResources().obtainTypedArray(R.array.nav_drawer_icons);
-        set(navMenuTitles,navMenuIcons);
+        TypedArray navMenuIcons = getResources().obtainTypedArray(R.array.nav_drawer_icons);
+        set(navMenuTitles, navMenuIcons);
+        displayView(0);
     }
 
 
@@ -173,18 +168,18 @@ public class MainActivity extends Activity {
         mTitle = mDrawerTitle = getTitle();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
-        navDrawerItems = new ArrayList<NavDrawerItem>();
+        ArrayList<NavDrawerItem> navDrawerItems = new ArrayList<NavDrawerItem>();
         if(navMenuIcons == null){
-            for(int iter = 0; iter < navMenuTitles.length; iter++){
-                navDrawerItems.add(new NavDrawerItem(navMenuTitles[iter]));
+            for (String navMenuTitle : navMenuTitles) {
+                navDrawerItems.add(new NavDrawerItem(navMenuTitle));
             }
         }else{
             for(int itr = 0; itr < navMenuTitles.length; itr++){
-                navDrawerItems.add(new NavDrawerItem(navMenuTitles[itr],navMenuIcons.getResourceId(itr,-1)));
+                navDrawerItems.add(new NavDrawerItem(navMenuTitles[itr], navMenuIcons.getResourceId(itr, -1)));
             }
         }
         mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
-        adapter = new NavDrawerListAdapter(getApplicationContext(),navDrawerItems);
+        NavDrawerListAdapter adapter = new NavDrawerListAdapter(getApplicationContext(), navDrawerItems);
         mDrawerList.setAdapter(adapter);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
@@ -212,21 +207,15 @@ public class MainActivity extends Activity {
 
         @Override
         public void afterTextChanged(Editable s) {
-            // TODO Auto-generated method stub
             String text = editsearch.getText().toString().toLowerCase(Locale.getDefault());
-            //adapter.filter(text);
         }
 
         @Override
         public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-            // TODO Auto-generated method stub
-
         }
 
         @Override
         public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-            // TODO Auto-generated method stub
-
         }
 
     };
