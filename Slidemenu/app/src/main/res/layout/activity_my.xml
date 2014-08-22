@@ -1,0 +1,31 @@
+<android.support.v4.widget.DrawerLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/drawer_layout"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.etsy.android.grid.StaggeredGridView
+            android:id="@+id/grid_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="2dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            app:item_margin="8dp"
+            app:column_count_portrait="2"
+            app:column_count_landscape="3"/>
+    </FrameLayout>
+<ListView
+    android:id="@+id/list_slidermenu"
+    android:layout_width="240dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:choiceMode="singleChoice"
+    android:divider="@color/list_divider"
+    android:dividerHeight="1dp"
+    android:listSelector="@drawable/list_selector"
+    android:background="#ccc"/>
+</android.support.v4.widget.DrawerLayout>

@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/prod_bg">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/singleproductsview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="12dp"
+        android:background="#FFF">
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="300dp">
+            <ImageView
+                android:id="@+id/product_image"
+                android:layout_width="fill_parent"
+                android:layout_height="300dp"
+                android:src="@drawable/kat1_ingatlan"
+                android:scaleType="centerCrop"
+            />
+
+            <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/image_gradient">
+                    <TextView
+                        android:id="@+id/text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="6dp"
+                        android:layout_marginBottom="18dp"
+                        android:shadowColor="#000"
+                        android:shadowRadius="7.0"
+                        android:text="2 napja 4 órája"
+                        android:textColor="@color/counter_text_color"
+                        android:textSize="18sp"
+                    />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="5dp"
+            android:background="@android:color/darker_gray"
+        />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+            <TextView
+                android:id="@+id/product_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:singleLine="false"
+                android:text="Kadafalván építési telek eladó"
+            />
+        </LinearLayout>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+        />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2.0"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+                <TextView
+                    android:id="@+id/product_region"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:text="Hajdú-Bihar"
+                />
+                <TextView
+                    android:id="@+id/product_price"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:textColor="@android:color/holo_blue_light"
+                    android:textSize="18sp"
+                    android:singleLine="false"
+                    android:text="18000000 HUF"
+                />
+        </LinearLayout>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+        />
+
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:example="http://schemas.android.com/apk/res/com.example.zsolt.slidemenu"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <com.example.zsolt.slidemenu.ExpandablePanel
+                android:id="@+id/foo"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                example:animationDuration="500"
+                example:collapsedHeight="50dip"
+                example:content="@+id/value"
+                example:handle="@+id/expand">
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent" >
+                    <TextView
+                        android:id="@+id/value"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+
+                        android:paddingTop="12dp"
+                        android:textSize="16sp"
+                        android:gravity="left"
+                        android:text="Kadafalván, Harkály utcában építési telek, jogerős építési engedéllyel eladó,Minimál stilusú családi ház tervvel. Szerződés és névre íratás után azonnal építhet.Kadafalván, Harkály utcában építési telek,jogerős építési engedéllyel eladó,Minimál stilusú családi ház tervvel. Szerződés és névre íratás után azonnal építhetKadafalván, Harkály utcában építési telek, jogerős építési engedéllyel eladó,Minimál stilusú családi ház tervvel. Szerződés és névre íratás után azonnal építhet.Kadafalván, Harkály utcában építési telek,jogerős építési engedéllyel eladó,Minimál stilusú családi ház tervvel. Szerződés és névre íratás után azonnal építhetKadafalván, Harkály utcában építési telek, jogerős építési engedéllyel eladó,Minimál stilusú családi ház tervvel. Szerződés és névre íratás után azonnal építhet.Kadafalván, Harkály utcában építési telek,jogerős építési engedéllyel eladó,Minimál stilusú családi ház tervvel. Szerződés és névre íratás után azonnal építhet."
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="false"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
+
+                    <ImageView
+                        android:id="@id/expand"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_action_expand"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@id/value" />
+                </RelativeLayout>
+            </com.example.zsolt.slidemenu.ExpandablePanel>
+        </LinearLayout>
+    </ScrollView>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        />
+
+    <LinearLayout
+        android:id="@+id/LinearLayout02"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:weightSum="2.0"
+        android:layout_alignParentBottom="true">
+        <Button
+            android:id="@+id/Button02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:drawableLeft="@drawable/ic_action_call"
+
+            android:text="Hivás  ">
+        </Button>
+        <Button
+            android:id="@+id/Button03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:drawableLeft="@drawable/ic_action_mail"
+            android:text="Üzenet">
+        </Button>
+    </LinearLayout>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="12dp"
+        android:text="További ajánlataink:"
+        android:textSize="20sp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="3.0"
+        >
+        <RelativeLayout
+            android:id="@+id/productpage_item1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:layout_marginRight="4dp"
+            android:background="@drawable/proba"
+            >
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_height="150dp"
+                android:layout_width="200dp"
+                android:adjustViewBounds="true"
+                android:layout_centerHorizontal="true"
+                android:maxHeight="160dp"
+                android:scaleType="centerCrop"
+                android:paddingTop="2dp"
+                android:layout_marginLeft="3dp"
+                android:src="@drawable/kateg"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView1"
+                android:orientation="vertical"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="4dp"
+                android:duplicateParentState="true"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:layout_marginBottom="4dp"
+                    android:gravity="center"
+
+                    android:textSize="15sp"
+                    android:singleLine="true"
+                    android:text="Eladó laptopok"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/holo_blue_light"
+                    android:layout_gravity="right"
+                    android:textSize="15sp"
+                    android:text="150000 HUF"
+                    />
+            </LinearLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/productpage_item2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/proba"
+            android:clickable="true"
+            android:focusable="true"
+            >
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_height="150dp"
+                android:layout_width="200dp"
+                android:layout_centerHorizontal="true"
+                android:maxHeight="160dp"
+                android:scaleType="centerCrop"
+                android:paddingTop="2dp"
+                android:layout_marginLeft="3dp"
+                android:src="@drawable/kateg2"
+                android:duplicateParentState="true"
+                android:adjustViewBounds="true"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView2"
+                android:orientation="vertical"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="4dp"
+                android:duplicateParentState="true"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:singleLine="true"
+                    android:text="Eladó telefonok"
+                    android:duplicateParentState="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/holo_blue_light"
+                    android:layout_gravity="right"
+                    android:textSize="15sp"
+                    android:text="65000 HUF"
+                    android:duplicateParentState="true"
+                    />
+
+
+            </LinearLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/productpage_item3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:layout_marginLeft="4dp"
+            android:background="@drawable/proba"
+            android:clickable="true"
+            android:focusable="true"
+            >
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_height="150dp"
+                android:layout_width="200dp"
+                android:adjustViewBounds="true"
+                android:layout_centerHorizontal="true"
+                android:maxHeight="160dp"
+                android:scaleType="centerCrop"
+                android:paddingTop="2dp"
+                android:layout_marginLeft="3dp"
+                android:src="@drawable/kateg3"
+                android:duplicateParentState="true"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView3"
+                android:orientation="vertical"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="4dp"
+                android:duplicateParentState="true"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:singleLine="true"
+                    android:text="Házikészitésü hangfal eladó"
+                    android:duplicateParentState="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/holo_blue_light"
+                    android:layout_gravity="right"
+                    android:textSize="15sp"
+                    android:text="25000 HUF"
+                    android:duplicateParentState="true"
+                    />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>
+</ScrollView>
