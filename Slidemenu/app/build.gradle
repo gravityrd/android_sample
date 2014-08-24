@@ -2,16 +2,10 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
-        config {
-            keyAlias 'Gravity R&D'
-            keyPassword 'szilva'
-            storeFile file('/m/android/Slidemenu/app/keystore/android.jks')
-            storePassword 'szilva'
-        }
         gravity {
             keyAlias 'gravity'
             keyPassword 'szilva'
-            storeFile file('/m/android/Slidemenu/app/keystore/gravity.jks')
+            storeFile file('keystore/gravity.jks')
             storePassword 'szilva'
         }
     }
