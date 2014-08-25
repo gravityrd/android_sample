@@ -1,4 +1,4 @@
-package com.gravityrd.slidemenu.slidemenu;
+package com.gravityrd.jofogas.slidemenu;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,8 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.gravityrd.slidemenu.R;
-import com.gravityrd.slidemenu.model.NavDrawerItem;
+import com.gravityrd.jofogas.R;
+import com.gravityrd.jofogas.model.NavDrawerItem;
 
 import java.util.ArrayList;
 
@@ -19,7 +19,7 @@ public class NavDrawerListAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<NavDrawerItem> navDrawerItems;
 
-    public NavDrawerListAdapter(Context context, ArrayList<NavDrawerItem> navDrawerItems){
+    public NavDrawerListAdapter(Context context, ArrayList<NavDrawerItem> navDrawerItems) {
         this.context = context;
         this.navDrawerItems = navDrawerItems;
     }

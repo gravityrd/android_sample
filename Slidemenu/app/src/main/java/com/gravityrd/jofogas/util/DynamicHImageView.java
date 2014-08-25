@@ -1,4 +1,4 @@
-package com.gravityrd.slidemenu.util;
+package com.gravityrd.jofogas.util;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -13,7 +13,8 @@ import android.util.AttributeSet;
 class DynamicHImageView extends com.etsy.android.grid.util.DynamicHeightImageView {
     public static float radius = 5.0f;
     Path clipPath = new Path();
-    RectF rect = new RectF(0,0,this.getWidth(),this.getHeight());
+    RectF rect = new RectF(0, 0, this.getWidth(), this.getHeight());
+
     public DynamicHImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -23,12 +24,12 @@ class DynamicHImageView extends com.etsy.android.grid.util.DynamicHeightImageVie
     }
 
     @Override
-    protected void onDraw(Canvas canvas){
+    protected void onDraw(Canvas canvas) {
         rect.left = 0;
         rect.top = 0;
         rect.right = this.getWidth();
         rect.bottom = this.getHeight();
-        clipPath.addRoundRect(rect,radius,radius, Path.Direction.CW);
+        clipPath.addRoundRect(rect, radius, radius, Path.Direction.CW);
         canvas.clipPath(clipPath);
         super.onDraw(canvas);
 

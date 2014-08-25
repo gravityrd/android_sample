@@ -2,19 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="5dp"
+    android:background="@drawable/proba"
+    android:orientation="vertical"
     android:paddingLeft="5dp"
     android:paddingRight="5dp"
-    android:background="@drawable/proba"
-    android:orientation="vertical" >
+    android:paddingTop="5dp">
 
-    <com.example.zsolt.slidemenu.DynamicHImageView
+    <com.gravityrd.jofogas.util.DynamicHImageView
         android:id="@+id/imgView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:scaleType="centerCrop"
-        />
+        android:scaleType="centerCrop" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
@@ -26,11 +26,11 @@
         android:layout_height="wrap_content"
         android:maxLines="2"
         android:paddingBottom="4dp"
-        android:paddingTop="4dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
-        android:textSize="18sp"
-        android:text="Ez egy terméknek a neve Ez egy terméknek a neve Tranzakció azonosító Tranzakció azonosító "/>
+        android:paddingTop="4dp"
+        android:text="Ez egy terméknek a neve Ez egy terméknek a neve Tranzakció azonosító Tranzakció azonosító "
+        android:textSize="18sp" />
 
     <View
         android:layout_width="match_parent"
@@ -41,13 +41,13 @@
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="end"
         android:paddingBottom="8dp"
-        android:paddingTop="4dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
-        android:gravity="end"
-        android:textColor="@android:color/holo_blue_light"
-        android:text="100000 HUF"/>
+        android:paddingTop="4dp"
+        android:text="100000 HUF"
+        android:textColor="@android:color/holo_blue_light" />
 
 
 </LinearLayout>

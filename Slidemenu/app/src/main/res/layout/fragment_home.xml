@@ -3,150 +3,159 @@
     android:id="@+id/home_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="true"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:clickable="true">
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:gravity="center|left"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:gravity="center|left"
-        android:orientation="vertical"
-        android:background="@android:color/white"
-        android:layout_weight="1"
 
         >
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginBottom="12dp"
+            android:layout_marginTop="8dp"
+            android:clickable="false"
             android:text="@string/rec_porducts"
             android:textColor="#000000"
-            android:textSize="20sp"
-            android:clickable="false"
-            />
+            android:textSize="20sp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:background="#ffffff"
             android:layout_weight="3.0"
+            android:background="#ffffff"
             android:clickable="false"
-            >
+            android:orientation="horizontal">
+
             <RelativeLayout
                 android:id="@+id/rec_prod1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.0"
                 android:layout_marginRight="4dp"
+                android:layout_weight="1.0"
                 android:background="@drawable/proba"
-                android:clickable="true"
-                >
+                android:clickable="true">
+
                 <ImageView
                     android:id="@+id/imageView1"
-                    android:layout_height="150dp"
                     android:layout_width="200dp"
-                    android:adjustViewBounds="true"
+                    android:layout_height="150dp"
                     android:layout_centerHorizontal="true"
-                    android:maxHeight="160dp"
-                    android:scaleType="centerCrop"
-                    android:paddingTop="2dp"
                     android:layout_marginLeft="3dp"
-                    android:src="@drawable/kateg"
-                    android:clickable="false"/>
+                    android:adjustViewBounds="true"
+                    android:clickable="false"
+                    android:maxHeight="160dp"
+                    android:paddingTop="2dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/kateg" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/imageView1"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="12dp"
                     android:orientation="vertical"
                     android:paddingLeft="4dp"
-                    android:paddingRight="4dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="4dp"
-                    >
+                    android:paddingRight="4dp">
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:background="#ccc" />
+
                     <TextView
                         android:id="@+id/prod_title1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#000000"
                         android:layout_marginBottom="4dp"
-                        android:gravity="center"
                         android:clickable="false"
-                        android:textSize="15sp"
+                        android:gravity="center"
                         android:singleLine="true"
-                        android:text="Nike 28,5 -es vadi új kislány sportcipő"/>
+                        android:text="Nike 28,5 -es vadi új kislány sportcipő"
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:background="#ccc" />
+
                     <TextView
                         android:id="@+id/price1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@android:color/holo_blue_light"
                         android:layout_gravity="right"
-                        android:textSize="15sp"
-                        android:text="15000 HUF"
                         android:clickable="false"
-                        />
+                        android:text="15000 HUF"
+                        android:textColor="@android:color/holo_blue_light"
+                        android:textSize="15sp" />
                 </LinearLayout>
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/rec_prod2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.0"
-                android:layout_marginRight="8dp"
                 android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1.0"
                 android:background="@drawable/proba"
-                android:clickable="true"
-                >
+                android:clickable="true">
+
                 <ImageView
                     android:id="@+id/imageView2"
-                    android:layout_height="150dp"
                     android:layout_width="200dp"
+                    android:layout_height="150dp"
                     android:layout_centerHorizontal="true"
-                    android:maxHeight="160dp"
-                    android:scaleType="centerCrop"
-                    android:paddingTop="2dp"
                     android:layout_marginLeft="3dp"
-                    android:src="@drawable/kateg2"
-                    android:duplicateParentState="true"
                     android:adjustViewBounds="true"
-                    android:clickable="false"/>
+                    android:clickable="false"
+                    android:duplicateParentState="true"
+                    android:maxHeight="160dp"
+                    android:paddingTop="2dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/kateg2" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/imageView2"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="12dp"
+                    android:clickable="false"
                     android:orientation="vertical"
                     android:paddingLeft="4dp"
-                    android:paddingRight="4dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="4dp"
-                    android:clickable="false"
-                    >
+                    android:paddingRight="4dp">
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:background="#ccc" />
+
                     <TextView
                         android:id="@+id/prod_title2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#000000"
                         android:layout_marginBottom="4dp"
+                        android:clickable="false"
                         android:gravity="center"
-                        android:textSize="15sp"
                         android:singleLine="true"
                         android:text="Nike 28,5 -es vadi új kislány sportcipő"
-                        android:clickable="false"/>
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
@@ -156,64 +165,67 @@
                         android:id="@+id/price2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@android:color/holo_blue_light"
                         android:layout_gravity="right"
-                        android:textSize="15sp"
-                        android:text="15000 HUF"
                         android:clickable="false"
-                        />
+                        android:text="15000 HUF"
+                        android:textColor="@android:color/holo_blue_light"
+                        android:textSize="15sp" />
 
 
                 </LinearLayout>
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/rec_prod3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.0"
                 android:layout_marginLeft="4dp"
+                android:layout_weight="1.0"
                 android:background="@drawable/proba"
                 android:clickable="true"
-                android:focusable="true"
-                >
+                android:focusable="true">
+
                 <ImageView
                     android:id="@+id/imageView3"
-                    android:layout_height="150dp"
                     android:layout_width="200dp"
-                    android:adjustViewBounds="true"
+                    android:layout_height="150dp"
                     android:layout_centerHorizontal="true"
-                    android:maxHeight="160dp"
-                    android:scaleType="centerCrop"
-                    android:paddingTop="2dp"
                     android:layout_marginLeft="3dp"
-                    android:src="@drawable/kateg3"
-                    android:clickable="false"/>
+                    android:adjustViewBounds="true"
+                    android:clickable="false"
+                    android:maxHeight="160dp"
+                    android:paddingTop="2dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/kateg3" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/imageView3"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="12dp"
+                    android:clickable="false"
                     android:orientation="vertical"
                     android:paddingLeft="4dp"
-                    android:paddingRight="4dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="4dp"
-                    android:clickable="false"
-                    >
+                    android:paddingRight="4dp">
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:background="#ccc" />
+
                     <TextView
                         android:id="@+id/prod_title3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#000000"
                         android:layout_marginBottom="4dp"
+                        android:clickable="false"
                         android:gravity="center"
-                        android:textSize="15sp"
                         android:singleLine="true"
                         android:text="Nike 28,5 -es vadi új kislány sportcipő"
-                        android:clickable="false"/>
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
@@ -223,667 +235,701 @@
                         android:id="@+id/price3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@android:color/holo_blue_light"
                         android:layout_gravity="right"
-                        android:textSize="15sp"
-                        android:text="15000 HUF"
                         android:clickable="false"
-                        />
+                        android:text="15000 HUF"
+                        android:textColor="@android:color/holo_blue_light"
+                        android:textSize="15sp" />
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
             android:layout_marginBottom="12dp"
+            android:layout_marginTop="24dp"
+            android:clickable="false"
             android:text="@string/rec_category"
             android:textColor="#000000"
-            android:textSize="20sp"
-            android:clickable="false"
-            />
+            android:textSize="20sp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
             android:layout_weight="3.0"
             android:clickable="false"
-            >
+            android:orientation="horizontal">
+
             <RelativeLayout
                 android:id="@+id/rec_cat1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.0"
                 android:layout_marginRight="4dp"
+                android:layout_weight="1.0"
                 android:background="@drawable/proba"
-                android:clickable="false"
-                >
+                android:clickable="false">
+
                 <ImageView
                     android:id="@+id/reccategory1"
-                    android:layout_height="150dp"
                     android:layout_width="200dp"
-                    android:adjustViewBounds="true"
+                    android:layout_height="150dp"
                     android:layout_centerHorizontal="true"
-                    android:maxHeight="160dp"
-                    android:scaleType="centerCrop"
-                    android:paddingTop="2dp"
                     android:layout_marginLeft="3dp"
-                    android:src="@drawable/kateg"
-                    android:clickable="false"/>
+                    android:adjustViewBounds="true"
+                    android:clickable="false"
+                    android:maxHeight="160dp"
+                    android:paddingTop="2dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/kateg" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/reccategory1"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="12dp"
+                    android:clickable="false"
                     android:orientation="vertical"
                     android:paddingLeft="4dp"
-                    android:paddingRight="4dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="4dp"
-                    android:clickable="false"
-                    >
+                    android:paddingRight="4dp">
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:background="#ccc" />
+
                     <TextView
                         android:id="@+id/rec_cat1_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="#000000"
                         android:layout_marginBottom="4dp"
+                        android:clickable="false"
                         android:gravity="center"
 
-                        android:textSize="15sp"
                         android:singleLine="true"
                         android:text="Műszaki cikkek"
-                        android:clickable="false"/>
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
 
                 </LinearLayout>
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/rec_cat2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.0"
-                android:layout_marginRight="8dp"
                 android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1.0"
                 android:background="@drawable/proba"
-                android:clickable="false"
-                >
+                android:clickable="false">
+
                 <ImageView
                     android:id="@+id/reccategory2"
-                    android:layout_height="150dp"
                     android:layout_width="200dp"
+                    android:layout_height="150dp"
                     android:layout_centerHorizontal="true"
-                    android:maxHeight="160dp"
-                    android:scaleType="centerCrop"
-                    android:paddingTop="2dp"
                     android:layout_marginLeft="3dp"
-                    android:src="@drawable/kateg2"
-                    android:duplicateParentState="true"
                     android:adjustViewBounds="true"
-                    android:clickable="false"/>
+                    android:clickable="false"
+                    android:duplicateParentState="true"
+                    android:maxHeight="160dp"
+                    android:paddingTop="2dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/kateg2" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/reccategory2"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="12dp"
+                    android:clickable="false"
                     android:orientation="vertical"
                     android:paddingLeft="4dp"
-                    android:paddingRight="4dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="4dp"
-                    android:clickable="false"
-                    >
+                    android:paddingRight="4dp">
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:background="#ccc" />
+
                     <TextView
                         android:id="@+id/rec_cat2_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#000000"
                         android:layout_marginBottom="4dp"
+                        android:clickable="false"
                         android:gravity="center"
-                        android:textSize="15sp"
                         android:singleLine="true"
                         android:text="Egyébb"
-                        android:clickable="false"/>
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
                 </LinearLayout>
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/rec_cat3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.0"
                 android:layout_marginLeft="4dp"
+                android:layout_weight="1.0"
                 android:background="@drawable/proba"
-                android:clickable="false"
-                >
+                android:clickable="false">
+
                 <ImageView
                     android:id="@+id/reccategory3"
-                    android:layout_height="150dp"
                     android:layout_width="200dp"
-                    android:adjustViewBounds="true"
+                    android:layout_height="150dp"
                     android:layout_centerHorizontal="true"
-                    android:maxHeight="160dp"
-                    android:scaleType="centerCrop"
-                    android:paddingTop="2dp"
                     android:layout_marginLeft="3dp"
-                    android:src="@drawable/kateg3"
-                    android:clickable="false"/>
+                    android:adjustViewBounds="true"
+                    android:clickable="false"
+                    android:maxHeight="160dp"
+                    android:paddingTop="2dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/kateg3" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/reccategory3"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="12dp"
+                    android:clickable="false"
                     android:orientation="vertical"
                     android:paddingLeft="4dp"
-                    android:paddingRight="4dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="4dp"
-                    android:clickable="false"
-                    >
+                    android:paddingRight="4dp">
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:background="#ccc" />
+
                     <TextView
                         android:id="@+id/rec_cat3_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#000000"
                         android:layout_marginBottom="4dp"
+                        android:clickable="false"
                         android:gravity="center"
-                        android:textSize="15sp"
                         android:maxLines="2"
                         android:text="Szabadidő/Sport"
-                        android:clickable="false"/>
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
             android:layout_marginBottom="12dp"
+            android:layout_marginTop="24dp"
+            android:clickable="false"
             android:text="@string/category_title"
             android:textColor="#000000"
-            android:textSize="20sp"
-            android:clickable="false"
-            />
+            android:textSize="20sp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
             android:layout_weight="3.0"
             android:clickable="false"
-            >
+            android:orientation="horizontal">
+
             <RelativeLayout
                 android:id="@+id/rec_cat4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:layout_marginRight="4dp"
                 android:layout_marginBottom="12dp"
+                android:layout_marginRight="4dp"
+                android:layout_weight="1.0"
                 android:background="@drawable/proba"
-                android:clickable="false"
-                >
+                android:clickable="false">
+
                 <ImageView
                     android:id="@+id/cat1_ingatlan"
-                    android:layout_height="150dp"
                     android:layout_width="200dp"
-                    android:adjustViewBounds="true"
+                    android:layout_height="150dp"
                     android:layout_centerHorizontal="true"
-                    android:maxHeight="160dp"
-                    android:scaleType="centerCrop"
-                    android:paddingTop="2dp"
                     android:layout_marginLeft="3dp"
-                    android:src="@drawable/kat1_ingatlan"
-                    android:clickable="false"/>
+                    android:adjustViewBounds="true"
+                    android:clickable="false"
+                    android:maxHeight="160dp"
+                    android:paddingTop="2dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/kat1_ingatlan" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/cat1_ingatlan"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="12dp"
+                    android:clickable="false"
                     android:orientation="vertical"
                     android:paddingLeft="4dp"
-                    android:paddingRight="4dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="4dp"
-                    android:clickable="false"
-                    >
+                    android:paddingRight="4dp">
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:background="#ccc" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#000000"
                         android:layout_marginBottom="4dp"
+                        android:clickable="false"
                         android:gravity="center"
 
-                        android:textSize="15sp"
                         android:singleLine="true"
                         android:text="Ingatlan"
-                        android:clickable="false"/>
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
 
                 </LinearLayout>
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/rec_cat5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.0"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginBottom="12dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1.0"
                 android:background="@drawable/proba"
-                android:clickable="false"
-                >
+                android:clickable="false">
+
                 <ImageView
                     android:id="@+id/cat2_jarmu"
-                    android:layout_height="150dp"
                     android:layout_width="200dp"
+                    android:layout_height="150dp"
                     android:layout_centerHorizontal="true"
-                    android:maxHeight="160dp"
-                    android:scaleType="centerCrop"
-                    android:paddingTop="2dp"
                     android:layout_marginLeft="3dp"
-                    android:src="@drawable/kat2_jarmu"
-                    android:duplicateParentState="true"
                     android:adjustViewBounds="true"
-                    android:clickable="false"/>
+                    android:clickable="false"
+                    android:duplicateParentState="true"
+                    android:maxHeight="160dp"
+                    android:paddingTop="2dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/kat2_jarmu" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/cat2_jarmu"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="12dp"
+                    android:clickable="false"
                     android:orientation="vertical"
                     android:paddingLeft="4dp"
-                    android:paddingRight="4dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="4dp"
-                    android:clickable="false"
-                    >
+                    android:paddingRight="4dp">
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:background="#ccc" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#000000"
                         android:layout_marginBottom="4dp"
+                        android:clickable="false"
                         android:gravity="center"
-                        android:textSize="15sp"
                         android:singleLine="true"
                         android:text="Jármű"
-                        android:clickable="false"/>
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
                 </LinearLayout>
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/rec_cat6"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.0"
-                android:layout_marginLeft="4dp"
                 android:layout_marginBottom="12dp"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1.0"
                 android:background="@drawable/proba"
-                android:clickable="false"
-                >
+                android:clickable="false">
+
                 <ImageView
                     android:id="@+id/cat3_othon"
-                    android:layout_height="150dp"
                     android:layout_width="200dp"
-                    android:adjustViewBounds="true"
+                    android:layout_height="150dp"
                     android:layout_centerHorizontal="true"
-                    android:maxHeight="160dp"
-                    android:scaleType="centerCrop"
-                    android:paddingTop="2dp"
                     android:layout_marginLeft="3dp"
-                    android:src="@drawable/kat3_othon"
-                    android:clickable="false"/>
+                    android:adjustViewBounds="true"
+                    android:clickable="false"
+                    android:maxHeight="160dp"
+                    android:paddingTop="2dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/kat3_othon" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/cat3_othon"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="12dp"
+                    android:clickable="false"
                     android:orientation="vertical"
                     android:paddingLeft="4dp"
-                    android:paddingRight="4dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="4dp"
-                    android:clickable="false"
-                    >
+                    android:paddingRight="4dp">
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:background="#ccc" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#000000"
                         android:layout_marginBottom="4dp"
+                        android:clickable="false"
                         android:gravity="center"
-                        android:textSize="15sp"
                         android:singleLine="true"
                         android:text="Othon/háztartás"
-                        android:clickable="false"/>
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
             android:layout_weight="3.0"
             android:clickable="false"
-            >
+            android:orientation="horizontal">
+
             <RelativeLayout
                 android:id="@+id/rec_cat7"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:layout_marginRight="4dp"
                 android:layout_marginBottom="12dp"
+                android:layout_marginRight="4dp"
+                android:layout_weight="1.0"
                 android:background="@drawable/proba"
-                android:clickable="false"
-                >
+                android:clickable="false">
+
                 <ImageView
                     android:id="@+id/cat4_muszaki"
-                    android:layout_height="150dp"
                     android:layout_width="200dp"
-                    android:adjustViewBounds="true"
+                    android:layout_height="150dp"
                     android:layout_centerHorizontal="true"
-                    android:maxHeight="160dp"
-                    android:scaleType="centerCrop"
-                    android:paddingTop="2dp"
                     android:layout_marginLeft="3dp"
-                    android:src="@drawable/kat4_muszakicikk"
-                    android:clickable="false"/>
+                    android:adjustViewBounds="true"
+                    android:clickable="false"
+                    android:maxHeight="160dp"
+                    android:paddingTop="2dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/kat4_muszakicikk" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/cat4_muszaki"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="12dp"
+                    android:clickable="false"
                     android:orientation="vertical"
                     android:paddingLeft="4dp"
-                    android:paddingRight="4dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="4dp"
-                    android:clickable="false"
-                    >
+                    android:paddingRight="4dp">
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:background="#ccc" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#000000"
                         android:layout_marginBottom="4dp"
+                        android:clickable="false"
                         android:gravity="center"
-                        android:textSize="15sp"
                         android:singleLine="true"
                         android:text="Műszaki cikkek"
-                        android:clickable="false"/>
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
 
                 </LinearLayout>
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/rec_cat8"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.0"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginBottom="12dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1.0"
                 android:background="@drawable/proba"
-                android:clickable="false"
-                >
+                android:clickable="false">
+
                 <ImageView
                     android:id="@+id/cat5_sport"
-                    android:layout_height="150dp"
                     android:layout_width="200dp"
+                    android:layout_height="150dp"
                     android:layout_centerHorizontal="true"
-                    android:maxHeight="160dp"
-                    android:scaleType="centerCrop"
-                    android:paddingTop="2dp"
                     android:layout_marginLeft="3dp"
-                    android:src="@drawable/kat5_sport"
-                    android:duplicateParentState="true"
                     android:adjustViewBounds="true"
-                    android:clickable="false"/>
+                    android:clickable="false"
+                    android:duplicateParentState="true"
+                    android:maxHeight="160dp"
+                    android:paddingTop="2dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/kat5_sport" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/cat5_sport"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="12dp"
+                    android:clickable="false"
                     android:orientation="vertical"
                     android:paddingLeft="4dp"
-                    android:paddingRight="4dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="4dp"
-                    android:clickable="false"
-                    >
+                    android:paddingRight="4dp">
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:background="#ccc" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#000000"
                         android:layout_marginBottom="4dp"
+                        android:clickable="false"
                         android:gravity="center"
-                        android:textSize="15sp"
                         android:singleLine="true"
                         android:text="Szabadidő,sport"
-                        android:clickable="false"/>
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
                 </LinearLayout>
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/rec_cat9"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.0"
-                android:layout_marginLeft="4dp"
                 android:layout_marginBottom="12dp"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1.0"
                 android:background="@drawable/proba"
-                android:clickable="false"
-                >
+                android:clickable="false">
+
                 <ImageView
                     android:id="@+id/cat6_hasznalati"
-                    android:layout_height="150dp"
                     android:layout_width="200dp"
-                    android:adjustViewBounds="true"
+                    android:layout_height="150dp"
                     android:layout_centerHorizontal="true"
-                    android:maxHeight="160dp"
-                    android:scaleType="centerCrop"
-                    android:paddingTop="2dp"
                     android:layout_marginLeft="3dp"
-                    android:src="@drawable/kat6_hasznalati"
-                    android:clickable="false"/>
+                    android:adjustViewBounds="true"
+                    android:clickable="false"
+                    android:maxHeight="160dp"
+                    android:paddingTop="2dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/kat6_hasznalati" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/cat6_hasznalati"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="12dp"
+                    android:clickable="false"
                     android:orientation="vertical"
                     android:paddingLeft="4dp"
-                    android:paddingRight="4dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="4dp"
-                    android:clickable="false"
-                    >
+                    android:paddingRight="4dp">
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:background="#ccc" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#000000"
                         android:layout_marginBottom="4dp"
+                        android:clickable="false"
                         android:gravity="center"
-                        android:textSize="15sp"
                         android:singleLine="true"
                         android:text="Használati tárgyak"
-                        android:clickable="false"/>
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
             android:layout_weight="3.0"
             android:clickable="false"
-            >
+            android:orientation="horizontal">
+
             <RelativeLayout
                 android:id="@+id/rec_cat10"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:layout_marginRight="4dp"
                 android:layout_marginBottom="12dp"
+                android:layout_marginRight="4dp"
+                android:layout_weight="1.0"
                 android:background="@drawable/proba"
-                android:clickable="false"
-                >
+                android:clickable="false">
+
                 <ImageView
                     android:id="@+id/cat7_munka"
-                    android:layout_height="150dp"
                     android:layout_width="200dp"
-                    android:adjustViewBounds="true"
+                    android:layout_height="150dp"
                     android:layout_centerHorizontal="true"
-                    android:maxHeight="160dp"
-                    android:scaleType="fitXY"
-                    android:paddingTop="2dp"
                     android:layout_marginLeft="3dp"
-                    android:src="@drawable/kat7_munka"
-                    android:clickable="false"/>
+                    android:adjustViewBounds="true"
+                    android:clickable="false"
+                    android:maxHeight="160dp"
+                    android:paddingTop="2dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/kat7_munka" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/cat7_munka"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="12dp"
+                    android:clickable="false"
                     android:orientation="vertical"
                     android:paddingLeft="4dp"
-                    android:paddingRight="4dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="4dp"
-                    android:clickable="false"
-                    >
+                    android:paddingRight="4dp">
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:background="#ccc" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#000000"
                         android:layout_marginBottom="4dp"
+                        android:clickable="false"
                         android:gravity="center"
 
-                        android:textSize="15sp"
                         android:singleLine="true"
                         android:text="Állás,munka"
-                        android:clickable="false"/>
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
 
                 </LinearLayout>
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/rec_cat11"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.0"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginBottom="12dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1.0"
                 android:background="@drawable/proba"
-                android:clickable="false"
-                >
+                android:clickable="false">
+
                 <ImageView
                     android:id="@+id/kat8_uzlet"
-                    android:layout_height="150dp"
                     android:layout_width="200dp"
+                    android:layout_height="150dp"
                     android:layout_centerHorizontal="true"
-                    android:maxHeight="160dp"
-                    android:scaleType="centerCrop"
-                    android:paddingTop="2dp"
                     android:layout_marginLeft="3dp"
-                    android:src="@drawable/kat8_uzlet"
-                    android:duplicateParentState="true"
                     android:adjustViewBounds="true"
-                    android:clickable="false"/>
+                    android:clickable="false"
+                    android:duplicateParentState="true"
+                    android:maxHeight="160dp"
+                    android:paddingTop="2dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/kat8_uzlet" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/kat8_uzlet"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="12dp"
+                    android:clickable="false"
                     android:orientation="vertical"
                     android:paddingLeft="4dp"
-                    android:paddingRight="4dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="4dp"
-                    android:clickable="false"
-                    >
+                    android:paddingRight="4dp">
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:background="#ccc" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#000000"
                         android:layout_marginBottom="4dp"
+                        android:clickable="false"
                         android:gravity="center"
-                        android:textSize="15sp"
                         android:singleLine="true"
                         android:text="Üzlet"
-                        android:clickable="false"/>
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
                 </LinearLayout>
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/rec_cat12"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.0"
-                android:layout_marginLeft="4dp"
                 android:layout_marginBottom="12dp"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1.0"
                 android:background="@drawable/proba"
-                android:clickable="false"
-                >
+                android:clickable="false">
+
                 <ImageView
                     android:id="@+id/cat9_egyebbek"
-                    android:layout_height="150dp"
                     android:layout_width="200dp"
+                    android:layout_height="150dp"
                     android:layout_centerHorizontal="true"
-                    android:maxHeight="160dp"
-                    android:scaleType="centerCrop"
-                    android:paddingTop="2dp"
                     android:layout_marginLeft="3dp"
-                    android:src="@drawable/kat9_egyebb"
-                    android:clickable="false"/>
+                    android:clickable="false"
+                    android:maxHeight="160dp"
+                    android:paddingTop="2dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/kat9_egyebb" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/cat9_egyebbek"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="12dp"
+                    android:clickable="false"
                     android:orientation="vertical"
                     android:paddingLeft="4dp"
-                    android:paddingRight="4dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="4dp"
-                    android:clickable="false"
-                    >
+                    android:paddingRight="4dp">
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:background="#ccc" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#000000"
                         android:layout_marginBottom="4dp"
+                        android:clickable="false"
                         android:gravity="center"
-                        android:textSize="15sp"
                         android:singleLine="true"
                         android:text="Egyébb"
-                        android:clickable="false"/>
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>

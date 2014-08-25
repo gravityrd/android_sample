@@ -6,21 +6,21 @@
 
     <TextView
         android:id="@+id/favoritestext"
-         android:layout_width="wrap_content"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:text="Favorites"
         android:textColor="@color/counter_text_bg"
-        android:textSize="16dp"
-        android:text="Favorites"/>
-    
+        android:textSize="16dp" />
+
     <ImageView
         android:id="@+id/favoritesicon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/favoritestext"
-        android:src="@drawable/ic_favorites"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"/>
-    
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_favorites" />
+
 
 </RelativeLayout>

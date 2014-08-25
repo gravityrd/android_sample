@@ -3,22 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/list_divider">
-    
+
     <TextView
         android:id="@+id/txtLabel"
-         android:layout_width="wrap_content"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:text="Settings"
         android:textColor="@color/counter_text_bg"
-        android:textSize="16dp"
-        android:text="Settings"/>
-    
-    <ImageView android:layout_width="wrap_content"
+        android:textSize="16dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/txtLabel"
-        android:src="@drawable/ic_settings"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"/>
-    
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_settings" />
+
 
 </RelativeLayout>

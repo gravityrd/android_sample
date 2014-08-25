@@ -1,4 +1,4 @@
-package com.gravityrd.slidemenu.activities;
+package com.gravityrd.jofogas.activities;
 
 import android.app.Application;
 

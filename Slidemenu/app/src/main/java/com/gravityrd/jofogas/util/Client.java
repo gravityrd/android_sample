@@ -1,8 +1,8 @@
-package com.gravityrd.slidemenu.util;
+package com.gravityrd.jofogas.util;
 
 import android.provider.Settings;
 
-import com.gravityrd.slidemenu.model.GravityProducts;
+import com.gravityrd.jofogas.model.GravityProducts;
 import com.gravityrd.receng.web.webshop.jsondto.GravityItem;
 import com.gravityrd.receng.web.webshop.jsondto.GravityItemRecommendation;
 import com.gravityrd.receng.web.webshop.jsondto.GravityNameValue;
@@ -24,7 +24,7 @@ public class Client {
         client.setRemoteUrl("https://saas.gravityrd.com/grrec-jofogas-war/WebshopServlet");
         client.setUserName("jofogas");
         client.setPassword("U272KF29tO");
-     }
+    }
 
     public static List<GravityProducts> getDataFromServer(String scenario, int count) {
         List<GravityProducts> gravityProductsList = new ArrayList<GravityProducts>();
@@ -32,7 +32,7 @@ public class Client {
         recomandationContext.scenarioId = scenario;
         recomandationContext.numberLimit = count;
         recomandationContext.recommendationTime = (int) (System.currentTimeMillis() / 1000);
-        recomandationContext.resultNameValues = new String[]{"Title", "body","image","ItemType","price","region","updateTimeStamp", "itemId"};
+        recomandationContext.resultNameValues = new String[]{"Title", "body", "image", "ItemType", "price", "region", "updateTimeStamp", "itemId"};
         GravityItemRecommendation itemRecommendation = null;
         try {
             itemRecommendation = client.getItemRecommendation(userID, cookieID, recomandationContext);
@@ -44,32 +44,32 @@ public class Client {
         }
         if (itemRecommendation != null) {
 
-            for(GravityItem item:itemRecommendation.items){
+            for (GravityItem item : itemRecommendation.items) {
 
                 GravityProducts product = new GravityProducts();
                 GravityNameValue[] itemNameValues = item.nameValues;
 
-                for (GravityNameValue itemNameValue: itemNameValues){
+                for (GravityNameValue itemNameValue : itemNameValues) {
 
-                    if(itemNameValue.name.equalsIgnoreCase("Title")){
+                    if (itemNameValue.name.equalsIgnoreCase("Title")) {
                         product.setProductTitle(itemNameValue.value);
                     }
-                    if(itemNameValue.name.equalsIgnoreCase("body")){
+                    if (itemNameValue.name.equalsIgnoreCase("body")) {
                         product.setProductBody(itemNameValue.value);
                     }
-                    if(itemNameValue.name.equalsIgnoreCase("image")){
-                        product.setProductImageUrl(itemNameValue.value.replace("thumbs","images"));
+                    if (itemNameValue.name.equalsIgnoreCase("image")) {
+                        product.setProductImageUrl(itemNameValue.value.replace("thumbs", "images"));
                     }
-                    if(itemNameValue.name.equalsIgnoreCase("ItemType")){
+                    if (itemNameValue.name.equalsIgnoreCase("ItemType")) {
                         product.setProductItemType(itemNameValue.value);
                     }
-                    if(itemNameValue.name.equalsIgnoreCase("region")){
+                    if (itemNameValue.name.equalsIgnoreCase("region")) {
                         product.setProductRegion(itemNameValue.value);
                     }
-                    if(itemNameValue.name.equalsIgnoreCase("price")){
+                    if (itemNameValue.name.equalsIgnoreCase("price")) {
                         product.setProductPrice(Long.parseLong(itemNameValue.value));
                     }
-                    if(itemNameValue.name.equalsIgnoreCase("updateTimeStamp")){
+                    if (itemNameValue.name.equalsIgnoreCase("updateTimeStamp")) {
                         product.setProductUpdateTimeStamp(Long.parseLong(itemNameValue.value));
                     }
                 }
@@ -86,8 +86,8 @@ public class Client {
         recomandationContext.scenarioId = scenario;
         recomandationContext.numberLimit = count;
         recomandationContext.recommendationTime = (int) (System.currentTimeMillis() / 1000);
-        recomandationContext.resultNameValues = new String[]{"Title", "body","image","ItemType","price","region","updateTimeStamp"};
-        GravityNameValue filter = new GravityNameValue("filter.categoryId",categoryType);
+        recomandationContext.resultNameValues = new String[]{"Title", "body", "image", "ItemType", "price", "region", "updateTimeStamp"};
+        GravityNameValue filter = new GravityNameValue("filter.categoryId", categoryType);
         recomandationContext.nameValues = new GravityNameValue[]{filter};
         GravityItemRecommendation itemRecommendation = null;
         try {
@@ -100,35 +100,35 @@ public class Client {
         }
         if (itemRecommendation != null) {
 
-            for(GravityItem item:itemRecommendation.items){
+            for (GravityItem item : itemRecommendation.items) {
 
                 GravityProducts product = new GravityProducts();
                 GravityNameValue[] itemNameValues = item.nameValues;
 
-                for (GravityNameValue itemNameValue: itemNameValues){
-                    if(itemNameValue.name.equalsIgnoreCase("itemId")){
+                for (GravityNameValue itemNameValue : itemNameValues) {
+                    if (itemNameValue.name.equalsIgnoreCase("itemId")) {
                         product.setProductItemId(itemNameValue.value);
                     }
-                    if(itemNameValue.name.equalsIgnoreCase("Title")){
+                    if (itemNameValue.name.equalsIgnoreCase("Title")) {
                         product.setProductTitle(itemNameValue.value);
                     }
-                    if(itemNameValue.name.equalsIgnoreCase("body")){
+                    if (itemNameValue.name.equalsIgnoreCase("body")) {
                         product.setProductBody(itemNameValue.value);
                     }
-                    if(itemNameValue.name.equalsIgnoreCase("image")){
+                    if (itemNameValue.name.equalsIgnoreCase("image")) {
                         product.setProductImageUrl(itemNameValue.value);
                         System.out.println("ItemId: " + item.itemId + " ImageUrl: " + itemNameValue.value);
                     }
-                    if(itemNameValue.name.equalsIgnoreCase("ItemType")){
+                    if (itemNameValue.name.equalsIgnoreCase("ItemType")) {
                         product.setProductItemType(itemNameValue.value);
                     }
-                    if(itemNameValue.name.equalsIgnoreCase("region")){
+                    if (itemNameValue.name.equalsIgnoreCase("region")) {
                         product.setProductRegion(itemNameValue.value);
                     }
-                    if(itemNameValue.name.equalsIgnoreCase("price")){
+                    if (itemNameValue.name.equalsIgnoreCase("price")) {
                         product.setProductRegion(itemNameValue.value);
                     }
-                    if(itemNameValue.name.equalsIgnoreCase("updateTimeStamp")){
+                    if (itemNameValue.name.equalsIgnoreCase("updateTimeStamp")) {
                         product.setProductRegion(itemNameValue.value);
                     }
                 }

@@ -1,4 +1,4 @@
-package com.gravityrd.slidemenu.slidemenu;
+package com.gravityrd.jofogas.slidemenu;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -19,26 +19,42 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.gravityrd.slidemenu.R;
-import com.gravityrd.slidemenu.fragments.FavoritesFragment;
-import com.gravityrd.slidemenu.fragments.HomeFragment;
-import com.gravityrd.slidemenu.fragments.LastVisitedFragment;
-import com.gravityrd.slidemenu.fragments.SettingsFragment;
-import com.gravityrd.slidemenu.model.NavDrawerItem;
+import com.gravityrd.jofogas.R;
+import com.gravityrd.jofogas.fragments.FavoritesFragment;
+import com.gravityrd.jofogas.fragments.HomeFragment;
+import com.gravityrd.jofogas.fragments.LastVisitedFragment;
+import com.gravityrd.jofogas.fragments.SettingsFragment;
+import com.gravityrd.jofogas.model.NavDrawerItem;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
 public class SlideMenu {
-    private EditText searchText;
     private final Activity activity;
-    private ListView mDrawerList;
-    protected DrawerLayout layout;
-    private final String[]  navMenuTitles;
+    private final String[] navMenuTitles;
     private final TypedArray navMenuIcons;
+    protected DrawerLayout layout;
+    private EditText searchText;
+    private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
+    private TextWatcher textWatcher = new TextWatcher() {
 
-    public SlideMenu(Activity activity){
+        @Override
+        public void afterTextChanged(Editable s) {
+            String text = searchText.getText().toString().toLowerCase(Locale.getDefault());
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+        }
+
+    };
+
+    public SlideMenu(Activity activity) {
         navMenuTitles = activity.getResources().getStringArray(R.array.nav_drawer_items);
         navMenuIcons = activity.getResources().obtainTypedArray(R.array.nav_drawer_icons);
         this.activity = activity;
@@ -113,7 +129,7 @@ public class SlideMenu {
         }
     }
 
-    public void setHeaderState(Menu menu){
+    public void setHeaderState(Menu menu) {
         boolean drawerOpen = layout.isDrawerOpen(mDrawerList);
         menu.findItem(R.id.menu_search).setVisible(!drawerOpen);
     }
@@ -169,22 +185,4 @@ public class SlideMenu {
             displayView(position);
         }
     }
-
-
-    private TextWatcher textWatcher = new TextWatcher() {
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            String text = searchText.getText().toString().toLowerCase(Locale.getDefault());
-        }
-
-        @Override
-        public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-        }
-
-        @Override
-        public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-        }
-
-    };
 }

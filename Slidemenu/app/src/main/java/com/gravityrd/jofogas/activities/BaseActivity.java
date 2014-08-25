@@ -1,4 +1,4 @@
-package com.gravityrd.slidemenu.activities;
+package com.gravityrd.jofogas.activities;
 
 import android.app.Activity;
 import android.content.res.Configuration;
@@ -6,22 +6,22 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.gravityrd.slidemenu.R;
-import com.gravityrd.slidemenu.slidemenu.SlideMenu;
+import com.gravityrd.jofogas.R;
+import com.gravityrd.jofogas.slidemenu.SlideMenu;
 
 
-public class MainActivity extends Activity {
-
-
-    private SlideMenu slideMenu;
+public abstract class BaseActivity extends Activity {
+    protected SlideMenu slideMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(getView());
         slideMenu = new SlideMenu(this);
-        slideMenu.displayView(0);
     }
+
+    protected abstract int getView();
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

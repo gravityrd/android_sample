@@ -6,6 +6,6 @@
     android:hint="@string/search_hint"
 
     android:imeOptions="actionDone"
-    android:inputType="text" >
+    android:inputType="text">
 
 </EditText>

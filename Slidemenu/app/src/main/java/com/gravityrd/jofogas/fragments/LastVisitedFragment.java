@@ -1,4 +1,4 @@
-package com.gravityrd.slidemenu.fragments;
+package com.gravityrd.jofogas.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.gravityrd.slidemenu.R;
+import com.gravityrd.jofogas.R;
 
 import java.util.List;
 

@@ -1,8 +1,7 @@
-package com.gravityrd.slidemenu.activities;
+package com.gravityrd.jofogas.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.res.TypedArray;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,19 +10,16 @@ import android.widget.AbsListView;
 import android.widget.Toast;
 
 import com.etsy.android.grid.StaggeredGridView;
-import com.gravityrd.slidemenu.R;
-import com.gravityrd.slidemenu.util.SampleAdapter;
-import com.gravityrd.slidemenu.model.GravityProducts;
-import com.gravityrd.slidemenu.slidemenu.SlideMenu;
-import com.gravityrd.slidemenu.util.Client;
+import com.gravityrd.jofogas.R;
+import com.gravityrd.jofogas.model.GravityProducts;
+import com.gravityrd.jofogas.util.Client;
+import com.gravityrd.jofogas.util.SampleAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class StaggeredListActivity extends MainActivity implements AbsListView.OnScrollListener {
+public class StaggeredListActivity extends BaseActivity implements AbsListView.OnScrollListener {
 
-    public static final String SAVED_DATA_KEY = "SAVED_DATA";
-    public static final int ITEM_ON_PAGE = 100;
     private static final String TAG = "StaggeredGridActivity";
     int current_page = 1;
     boolean error = false;
@@ -34,28 +30,27 @@ public class StaggeredListActivity extends MainActivity implements AbsListView.O
     private SampleAdapter mAdapter;
     private List<GravityProducts> mData;
     private String categoryType;
-    private String[] navMenuTitles;
-    private TypedArray navMenuIcons;
     private String content = null;
-    private SlideMenu slideMenu;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my);
-        slideMenu = new SlideMenu(this);
-
 
         Intent categoryIntent = getIntent();
         Bundle bundle = categoryIntent.getExtras();
         if (bundle != null) {
-            if(bundle.keySet().contains("category")){
+            if (bundle.keySet().contains("category")) {
                 categoryType = (String) bundle.get("category");
             }
         }
 
         new GetCategoryContentTask().execute();
+    }
+
+    @Override
+    protected int getView() {
+        return R.layout.activity_my;
     }
 
     @Override

@@ -4,6 +4,6 @@
         <attr name="handle" format="reference" />
         <attr name="content" format="reference" />
         <attr name="collapsedHeight" format="dimension" />
-        <attr name="animationDuration" format="integer"/>
+        <attr name="animationDuration" format="integer" />
     </declare-styleable>
 </resources>

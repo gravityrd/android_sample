@@ -1,6 +1,6 @@
-package com.gravityrd.slidemenu.model;
+package com.gravityrd.jofogas.model;
 
-import com.gravityrd.slidemenu.R;
+import com.gravityrd.jofogas.R;
 
 import java.util.ArrayList;
 import java.util.Iterator;

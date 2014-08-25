@@ -1,4 +1,4 @@
-package com.gravityrd.slidemenu.util;
+package com.gravityrd.jofogas.util;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -9,12 +9,12 @@ import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.LinearLayout;
 
-import com.gravityrd.slidemenu.R;
+import com.gravityrd.jofogas.R;
 
 /**
  * Created by zsolt on 2014.08.05..
  */
-public class ExpandablePanel extends LinearLayout{
+public class ExpandablePanel extends LinearLayout {
 
     private final int mHandleId;
     private final int mContentId;
@@ -40,9 +40,9 @@ public class ExpandablePanel extends LinearLayout{
     }
 
     /**
-      The constructor simply validates the arguments being passed in and
-      sets the global variables accordingly. Required attributes are
-      'handle' and 'content'
+     * The constructor simply validates the arguments being passed in and
+     * sets the global variables accordingly. Required attributes are
+     * 'handle' and 'content'
      */
 
     public ExpandablePanel(Context context, AttributeSet attrs) {
@@ -59,12 +59,12 @@ public class ExpandablePanel extends LinearLayout{
         int handleId = a.getResourceId(R.styleable.ExpandablePanel_handle, 0);
 
         if (handleId == 0) {
-            throw new IllegalArgumentException("The handle attribute is required and must refer "+"to a valid child.");
+            throw new IllegalArgumentException("The handle attribute is required and must refer " + "to a valid child.");
         }
 
         int contentId = a.getResourceId(R.styleable.ExpandablePanel_content, 0);
         if (contentId == 0) {
-            throw new IllegalArgumentException("The content attribute is required and must "+"refer to a valid child.");
+            throw new IllegalArgumentException("The content attribute is required and must " + "refer to a valid child.");
         }
 
         mHandleId = handleId;
@@ -96,12 +96,12 @@ public class ExpandablePanel extends LinearLayout{
         super.onFinishInflate();
         mHandle = findViewById(mHandleId);
         if (mHandle == null) {
-            throw new IllegalArgumentException("The handle attribute is must refer to an"+" existing child.");
+            throw new IllegalArgumentException("The handle attribute is must refer to an" + " existing child.");
         }
 
         mContent = findViewById(mContentId);
         if (mContent == null) {
-            throw new IllegalArgumentException("The content attribute must refer to an"+" existing child.");
+            throw new IllegalArgumentException("The content attribute must refer to an" + " existing child.");
         }
 
         // This changes the height of the content such that it
@@ -125,7 +125,7 @@ public class ExpandablePanel extends LinearLayout{
         mContent.measure(widthMeasureSpec, MeasureSpec.UNSPECIFIED);
         mContentHeight = mContent.getMeasuredHeight();
         Log.v("cHeight", mContentHeight + "");
-        Log.v("cCollapseHeight", mCollapsedHeight+"");
+        Log.v("cCollapseHeight", mCollapsedHeight + "");
 
         if (mContentHeight < mCollapsedHeight) {
             mHandle.setVisibility(View.GONE);
@@ -135,6 +135,15 @@ public class ExpandablePanel extends LinearLayout{
 
         // Then let the usual thing happen
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+    /**
+     * Simple OnExpandListener interface
+     */
+    public interface OnExpandListener {
+        public void onExpand(View handle, View content);
+
+        public void onCollapse(View handle, View content);
     }
 
     /**
@@ -185,16 +194,11 @@ public class ExpandablePanel extends LinearLayout{
         }
     }
 
-    /**
-     * Simple OnExpandListener interface
-     */
-    public interface OnExpandListener {
-        public void onExpand(View handle, View content);
-        public void onCollapse(View handle, View content);
-    }
-
     private class DefaultOnExpandListener implements OnExpandListener {
-        public void onCollapse(View handle, View content) {}
-        public void onExpand(View handle, View content) {}
+        public void onCollapse(View handle, View content) {
+        }
+
+        public void onExpand(View handle, View content) {
+        }
     }
 }

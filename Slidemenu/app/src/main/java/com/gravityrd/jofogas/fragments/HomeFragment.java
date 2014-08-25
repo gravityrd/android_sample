@@ -1,4 +1,4 @@
-package com.gravityrd.slidemenu.fragments;
+package com.gravityrd.jofogas.fragments;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
@@ -13,13 +13,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.gravityrd.slidemenu.R;
-import com.gravityrd.slidemenu.activities.SingleItemActivity;
-import com.gravityrd.slidemenu.activities.StaggeredListActivity;
-import com.gravityrd.slidemenu.model.Categories;
-import com.gravityrd.slidemenu.model.Category;
-import com.gravityrd.slidemenu.model.GravityProducts;
-import com.gravityrd.slidemenu.util.Client;
+import com.gravityrd.jofogas.R;
+import com.gravityrd.jofogas.activities.SingleItemActivity;
+import com.gravityrd.jofogas.activities.StaggeredListActivity;
+import com.gravityrd.jofogas.model.Categories;
+import com.gravityrd.jofogas.model.Category;
+import com.gravityrd.jofogas.model.GravityProducts;
+import com.gravityrd.jofogas.util.Client;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;

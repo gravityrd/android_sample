@@ -4,22 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/list_divider">
-    
+
     <TextView
         android:id="@+id/txtLabel"
-         android:layout_width="wrap_content"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:layout_below="@+id/carddemo"
+        android:layout_centerInParent="true"
+        android:text="Last Visited"
         android:textColor="@color/counter_text_color"
-        android:textSize="16dp"
-        android:text="Last Visited"/>
+        android:textSize="16dp" />
 
     <it.gmariotti.cardslib.library.view.CardListView
         android:id="@+id/carddemo"
         android:layout_width="400dp"
         android:layout_height="400dp"
         card:card_layout_resourceID="@layout/card_thumbnail_layout" />
-    
+
 
 </RelativeLayout>
