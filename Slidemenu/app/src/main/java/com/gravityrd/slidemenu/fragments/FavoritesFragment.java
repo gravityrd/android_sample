@@ -1,15 +1,12 @@
-package com.example.zsolt.slidemenu;
+package com.gravityrd.slidemenu.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.example.zsolt.slidemenu.R;
-
-import org.w3c.dom.Text;
+import com.gravityrd.slidemenu.R;
 
 /**
  * Created by zsolt on 2014.07.21..

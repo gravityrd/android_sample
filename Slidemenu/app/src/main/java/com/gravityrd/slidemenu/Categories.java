@@ -1,4 +1,4 @@
-package com.example.zsolt.slidemenu;
+package com.gravityrd.slidemenu;
 
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -1,7 +1,4 @@
-package com.example.zsolt.slidemenu;
-
-import com.example.zsolt.slidemenu.com.example.zsolt.slidemenu.adapter.NavDrawerListAdapter;
-import com.example.zsolt.slidemenu.model.NavDrawerItem;
+package com.gravityrd.slidemenu;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -21,17 +18,22 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.gravityrd.slidemenu.fragments.FavoritesFragment;
+import com.gravityrd.slidemenu.fragments.HomeFragment;
+import com.gravityrd.slidemenu.fragments.LastVisitedFragment;
+import com.gravityrd.slidemenu.fragments.SettingsFragment;
+import com.gravityrd.slidemenu.model.NavDrawerItem;
+import com.gravityrd.slidemenu.slidemenu.NavDrawerListAdapter;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
 
 public class MainActivity extends Activity {
-    private EditText editsearch;
     protected DrawerLayout mDrawerLayout;
+    private EditText editsearch;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
 
@@ -43,26 +45,39 @@ public class MainActivity extends Activity {
 
     // slide menu items
     private String[] navMenuTitles;
+    private TextWatcher textWatcher = new TextWatcher() {
 
+        @Override
+        public void afterTextChanged(Editable s) {
+            String text = editsearch.getText().toString().toLowerCase(Locale.getDefault());
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+        }
+
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
-        TypedArray navMenuIcons = getResources().obtainTypedArray(R.array.nav_drawer_icons);
-        set(navMenuTitles, navMenuIcons);
+        createFragments();
         displayView(0);
     }
 
+    protected void createFragments(){
+        navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
+        TypedArray navMenuIcons = getResources().obtainTypedArray(R.array.nav_drawer_icons);
+        set(navMenuTitles, navMenuIcons);
+    }
 
-   // Slide menu item click listener
-    private class SlideMenuClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            // display view for selected nav drawer item
-            displayView(position);
-        }
+    protected void displayMain() {
+        displayView(0);
     }
 
     @Override
@@ -83,7 +98,7 @@ public class MainActivity extends Activity {
             public boolean onMenuItemActionCollapse(MenuItem item) {
                 editsearch.requestFocus();
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
                 return true;
             }
         });
@@ -114,7 +129,7 @@ public class MainActivity extends Activity {
     }
 
 
-     //Diplaying fragment view for selected nav drawer list item
+    //Diplaying fragment view for selected nav drawer list item
 
     private void displayView(int position) {
         // update the main content by replacing fragments
@@ -139,7 +154,7 @@ public class MainActivity extends Activity {
 
         if (fragment != null) {
             FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.frame_container,fragment).commit();
+            fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
 
             // update selected item and title, then close the drawer
             mDrawerList.setItemChecked(position, true);
@@ -164,17 +179,17 @@ public class MainActivity extends Activity {
         mDrawerToggle.syncState();
     }
 
-    public void set(String[] navMenuTitles,TypedArray navMenuIcons){
+    public void set(String[] navMenuTitles, TypedArray navMenuIcons) {
         mTitle = mDrawerTitle = getTitle();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
         ArrayList<NavDrawerItem> navDrawerItems = new ArrayList<NavDrawerItem>();
-        if(navMenuIcons == null){
+        if (navMenuIcons == null) {
             for (String navMenuTitle : navMenuTitles) {
                 navDrawerItems.add(new NavDrawerItem(navMenuTitle));
             }
-        }else{
-            for(int itr = 0; itr < navMenuTitles.length; itr++){
+        } else {
+            for (int itr = 0; itr < navMenuTitles.length; itr++) {
                 navDrawerItems.add(new NavDrawerItem(navMenuTitles[itr], navMenuIcons.getResourceId(itr, -1)));
             }
         }
@@ -183,12 +198,13 @@ public class MainActivity extends Activity {
         mDrawerList.setAdapter(adapter);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
-        mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout,R.drawable.ic_drawer,R.string.app_name,R.string.app_name){
-            public void onDrawerClosed(View view){
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.app_name, R.string.app_name) {
+            public void onDrawerClosed(View view) {
                 getActionBar().setTitle(mTitle);
                 invalidateOptionsMenu();
             }
-            public void onDrawerOpened(View view){
+
+            public void onDrawerOpened(View view) {
                 getActionBar().setTitle(mDrawerTitle);
                 invalidateOptionsMenu();
             }
@@ -203,21 +219,13 @@ public class MainActivity extends Activity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-    private TextWatcher textWatcher = new TextWatcher() {
-
+    // Slide menu item click listener
+    private class SlideMenuClickListener implements ListView.OnItemClickListener {
         @Override
-        public void afterTextChanged(Editable s) {
-            String text = editsearch.getText().toString().toLowerCase(Locale.getDefault());
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            // display view for selected nav drawer item
+            displayView(position);
         }
-
-        @Override
-        public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-        }
-
-        @Override
-        public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-        }
-
-    };
+    }
 
 }

@@ -1,6 +1,5 @@
-package com.example.zsolt.slidemenu;
+package com.gravityrd.slidemenu.fragments;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -14,7 +13,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.zsolt.slidemenu.model.GravityProducts;
+import com.gravityrd.slidemenu.Categories;
+import com.gravityrd.slidemenu.Category;
+import com.gravityrd.slidemenu.Client;
+import com.gravityrd.slidemenu.R;
+import com.gravityrd.slidemenu.SingleItemActivity;
+import com.gravityrd.slidemenu.StaggeredListActivity;
+import com.gravityrd.slidemenu.model.GravityProducts;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
@@ -134,12 +139,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.rec_prod1:
                 startActivity(addIntent(gravityProductsList.get(0)));
+                Log.i("kelene","de nincs");
                 break;
             case R.id.rec_prod2:
                 startActivity(addIntent(gravityProductsList.get(1)));
                 break;
             case R.id.rec_prod3:
-                startActivity(addIntent(gravityProductsList.get(2)));
+                getActivity().startActivity(addIntent(gravityProductsList.get(2)));
                 break;
             case R.id.rec_cat1:
                 Intent intent4 = new Intent(getActivity(), StaggeredListActivity.class);
@@ -225,7 +231,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private Intent addIntent(GravityProducts gravityProducts) {
-        Intent intent = new Intent(getActivity(), SingleItemActivity.class);
+        Log.i("Inent","itt vagyok");
+        Intent intent = new Intent(cont.getApplicationContext(), SingleItemActivity.class);
         intent.putExtra("ItemId", gravityProducts.getProductItemId());
         intent.putExtra("Title", gravityProducts.getProductTitle());
         intent.putExtra("Body", gravityProducts.getProductBody());
@@ -233,7 +240,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         intent.putExtra("Price", gravityProducts.getProductPrice());
         intent.putExtra("Region", gravityProducts.getProductRegion());
         intent.putExtra("Time", gravityProducts.getProductUpdateTimeStamp());
-
         return intent;
     }
 

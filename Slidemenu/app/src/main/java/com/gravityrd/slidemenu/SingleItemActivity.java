@@ -1,7 +1,6 @@
-package com.example.zsolt.slidemenu;
+package com.gravityrd.slidemenu;
 
 import android.content.Intent;
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +16,8 @@ public class SingleItemActivity extends MainActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.singleproductview);
+        createFragments();
+
 
         Intent prodIntent = getIntent();
         Bundle bundle = prodIntent.getExtras();

@@ -1,4 +1,4 @@
-package com.example.zsolt.slidemenu.com.example.zsolt.slidemenu.adapter;
+package com.gravityrd.slidemenu.slidemenu;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,14 +9,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.zsolt.slidemenu.R;
-import com.example.zsolt.slidemenu.model.NavDrawerItem;
+import com.gravityrd.slidemenu.R;
+import com.gravityrd.slidemenu.model.NavDrawerItem;
 
 import java.util.ArrayList;
 
-/**
- * Created by zsolt on 2014.07.21..
- */
 public class NavDrawerListAdapter extends BaseAdapter {
 
     private Context context;

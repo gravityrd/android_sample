@@ -117,7 +117,7 @@ android:layout_height="match_parent">
 
 
             <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:example="http://schemas.android.com/apk/res/com.example.zsolt.slidemenu"
+                xmlns:example="http://schemas.android.com/apk/res/com.gravityrd.slidemenu"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
 
@@ -128,7 +128,7 @@ android:layout_height="match_parent">
                     android:layout_height="fill_parent"
                     android:orientation="vertical" >
 
-                    <com.example.zsolt.slidemenu.ExpandablePanel
+                    <com.gravityrd.slidemenu.ExpandablePanel
                         android:id="@+id/foo"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -164,7 +164,7 @@ android:layout_height="match_parent">
                                 android:layout_alignParentRight="true"
                                 android:layout_below="@id/value" />
                         </RelativeLayout>
-                    </com.example.zsolt.slidemenu.ExpandablePanel>
+                    </com.gravityrd.slidemenu.ExpandablePanel>
                 </LinearLayout>
             </ScrollView>
             <View

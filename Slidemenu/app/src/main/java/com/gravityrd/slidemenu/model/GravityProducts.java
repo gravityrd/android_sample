@@ -1,4 +1,4 @@
-package com.example.zsolt.slidemenu.model;
+package com.gravityrd.slidemenu.model;
 
 /**
  * Created by zsolt on 2014.08.14..

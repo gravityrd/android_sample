@@ -1,4 +1,4 @@
-package com.example.zsolt.slidemenu; /**
+package com.gravityrd.slidemenu; /**
  * Created by zsolt on 2014.08.13..
  */
 
@@ -6,22 +6,18 @@ package com.example.zsolt.slidemenu; /**
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.etsy.android.grid.StaggeredGridView;
-import com.example.zsolt.slidemenu.model.GravityProducts;
+import com.gravityrd.slidemenu.model.GravityProducts;
 
 public class StaggeredListActivity extends MainActivity implements AbsListView.OnScrollListener{
 

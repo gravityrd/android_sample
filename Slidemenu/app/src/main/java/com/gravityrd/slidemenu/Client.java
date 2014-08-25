@@ -1,13 +1,8 @@
-package com.example.zsolt.slidemenu;
+package com.gravityrd.slidemenu;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.os.AsyncTask;
 import android.provider.Settings;
-import android.util.Log;
-import android.view.View;
 
-import com.example.zsolt.slidemenu.model.GravityProducts;
+import com.gravityrd.slidemenu.model.GravityProducts;
 import com.gravityrd.receng.web.webshop.jsondto.GravityItem;
 import com.gravityrd.receng.web.webshop.jsondto.GravityItemRecommendation;
 import com.gravityrd.receng.web.webshop.jsondto.GravityNameValue;

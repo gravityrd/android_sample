@@ -1,4 +1,4 @@
-package com.example.zsolt.slidemenu;
+package com.gravityrd.slidemenu;
 
 import android.content.Context;
 import android.content.res.TypedArray;
