@@ -13,22 +13,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.gravityrd.slidemenu.Categories;
-import com.gravityrd.slidemenu.Category;
-import com.gravityrd.slidemenu.Client;
 import com.gravityrd.slidemenu.R;
-import com.gravityrd.slidemenu.SingleItemActivity;
-import com.gravityrd.slidemenu.StaggeredListActivity;
+import com.gravityrd.slidemenu.activities.SingleItemActivity;
+import com.gravityrd.slidemenu.activities.StaggeredListActivity;
+import com.gravityrd.slidemenu.model.Categories;
+import com.gravityrd.slidemenu.model.Category;
 import com.gravityrd.slidemenu.model.GravityProducts;
+import com.gravityrd.slidemenu.util.Client;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
-
-
-/**
- * Created by zsolt on 2014.07.21..
- */
-
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
     ProgressDialog progressDialog;
@@ -136,102 +130,66 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        Intent i = null;
         switch (v.getId()) {
             case R.id.rec_prod1:
-                startActivity(addIntent(gravityProductsList.get(0)));
-                Log.i("kelene","de nincs");
+                i = singleItemViewIntent(gravityProductsList.get(0));
                 break;
             case R.id.rec_prod2:
-                startActivity(addIntent(gravityProductsList.get(1)));
+                i = singleItemViewIntent(gravityProductsList.get(1));
                 break;
             case R.id.rec_prod3:
-                getActivity().startActivity(addIntent(gravityProductsList.get(2)));
+                i = singleItemViewIntent(gravityProductsList.get(2));
                 break;
             case R.id.rec_cat1:
-                Intent intent4 = new Intent(getActivity(), StaggeredListActivity.class);
-                String temp4 = recCategory1Text.getText().toString();
-                intent4.putExtra("recCat1", temp4);
-                startActivity(intent4);
+                i = categoryViewIntent(categoryRecomandation[0]);
                 break;
             case R.id.rec_cat2:
-                Intent intent5 = new Intent(getActivity(), StaggeredListActivity.class);
-                String temp5 = recCategory1Text.getText().toString();
-                intent5.putExtra("recCat2", temp5);
-                startActivity(intent5);
+                i = categoryViewIntent(categoryRecomandation[1]);
                 break;
             case R.id.rec_cat3:
-                Intent intent6 = new Intent(getActivity(), StaggeredListActivity.class);
-                String temp6 = recCategory1Text.getText().toString();
-                intent6.putExtra("recCat3", temp6);
-                startActivity(intent6);
+                i = categoryViewIntent(categoryRecomandation[2]);
                 break;
             case R.id.rec_cat4:
-                Intent intent7 = new Intent(getActivity(), StaggeredListActivity.class);
-                String temp7 = "1000";
-                intent7.putExtra("Ingatlan", temp7);
-                startActivity(intent7);
+                i = categoryViewIntent("1");
                 break;
             case R.id.rec_cat5:
-                Intent intent8 = new Intent(getActivity(), StaggeredListActivity.class);
-                String temp8 = "2000";
-                intent8.putExtra("Jarmu", temp8);
-                startActivity(intent8);
+                i = categoryViewIntent("2");
                 break;
 
             case R.id.rec_cat6:
-                Intent intent9 = new Intent(getActivity(), StaggeredListActivity.class);
-                String temp9 = "3000";
-                intent9.putExtra("Othon", temp9);
-                startActivity(intent9);
+                i = categoryViewIntent("3");
                 break;
 
             case R.id.rec_cat7:
-                Intent intent10 = new Intent(getActivity(), StaggeredListActivity.class);
-                String temp10 = "5000";
-                intent10.putExtra("Elektronika", temp10);
-                startActivity(intent10);
+                i = categoryViewIntent("5");
                 break;
 
             case R.id.rec_cat8:
-                Intent intent11 = new Intent(getActivity(), StaggeredListActivity.class);
-                String temp11 = "4000";
-                intent11.putExtra("Sport", temp11);
-                startActivity(intent11);
+                i = categoryViewIntent("4");
                 break;
 
             case R.id.rec_cat9:
-                Intent intent12 = new Intent(getActivity(), StaggeredListActivity.class);
-                String temp12 = "8000";
-                intent12.putExtra("Hasznalati", temp12);
-                startActivity(intent12);
+                i = categoryViewIntent("8");
                 break;
 
             case R.id.rec_cat10:
-                Intent intent13 = new Intent(getActivity(), StaggeredListActivity.class);
-                String temp13 = "6000";
-                intent13.putExtra("Munka", temp13);
-                startActivity(intent13);
+                i = categoryViewIntent("6");
                 break;
             case R.id.rec_cat11:
-                Intent intent14 = new Intent(getActivity(), StaggeredListActivity.class);
-                String temp14 = "9000";
-                intent14.putExtra("Uzlet", temp14);
-                startActivity(intent14);
+                i = categoryViewIntent("7");
                 break;
             case R.id.rec_cat12:
-                Intent intent15 = new Intent(getActivity(), StaggeredListActivity.class);
-                String temp15 = "7000";
-                intent15.putExtra("Egyeb", temp15);
-                startActivity(intent15);
+                i = categoryViewIntent("9");
                 break;
-
-
         }
+        if (i != null)
+            startActivity(i);
 
     }
 
-    private Intent addIntent(GravityProducts gravityProducts) {
-        Log.i("Inent","itt vagyok");
+    private Intent singleItemViewIntent(GravityProducts gravityProducts) {
+        Log.i("Inent", "itt vagyok");
         Intent intent = new Intent(cont.getApplicationContext(), SingleItemActivity.class);
         intent.putExtra("ItemId", gravityProducts.getProductItemId());
         intent.putExtra("Title", gravityProducts.getProductTitle());
@@ -242,6 +200,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         intent.putExtra("Time", gravityProducts.getProductUpdateTimeStamp());
         return intent;
     }
+
+    private Intent categoryViewIntent(String category) {
+        Intent i = new Intent(getActivity(), StaggeredListActivity.class);
+        i.putExtra("category", category);
+        return i;
+    }
+
 
 }
 

@@ -1,4 +1,4 @@
-package com.gravityrd.slidemenu;
+package com.gravityrd.slidemenu.model;
 
 public class Category{
     public final Integer imageResourceId;

@@ -1,4 +1,6 @@
-package com.gravityrd.slidemenu;
+package com.gravityrd.slidemenu.model;
+
+import com.gravityrd.slidemenu.R;
 
 import java.util.ArrayList;
 import java.util.Iterator;

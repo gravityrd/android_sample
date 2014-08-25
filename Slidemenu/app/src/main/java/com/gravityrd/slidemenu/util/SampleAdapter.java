@@ -1,4 +1,4 @@
-package com.gravityrd.slidemenu;
+package com.gravityrd.slidemenu.util;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.gravityrd.slidemenu.R;
+import com.gravityrd.slidemenu.activities.SingleItemActivity;
 import com.gravityrd.slidemenu.model.GravityProducts;
 import com.nostra13.universalimageloader.core.ImageLoader;
 

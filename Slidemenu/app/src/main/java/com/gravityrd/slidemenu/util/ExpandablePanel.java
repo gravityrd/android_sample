@@ -1,4 +1,4 @@
-package com.gravityrd.slidemenu;
+package com.gravityrd.slidemenu.util;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.LinearLayout;
+
+import com.gravityrd.slidemenu.R;
 
 /**
  * Created by zsolt on 2014.08.05..

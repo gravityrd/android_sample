@@ -1,4 +1,4 @@
-package com.gravityrd.slidemenu;
+package com.gravityrd.slidemenu.activities;
 
 import android.app.Application;
 

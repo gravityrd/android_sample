@@ -1,4 +1,4 @@
-package com.gravityrd.slidemenu;
+package com.gravityrd.slidemenu.util;
 
 import android.content.Context;
 import android.graphics.Canvas;
