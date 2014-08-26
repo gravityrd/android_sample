@@ -93,7 +93,7 @@ public class StaggeredListActivity extends BaseActivity implements AbsListView.O
             loadingMore = true;
             mData = new ArrayList<GravityProducts>();
             try {
-                mData = Client.getCategoryDataFromServer("ITEM_PAGE", 100, categoryType);//SEARCH_PAGE_ORDERING
+                mData = Client.getCategoryDataFromServer("MOBIL_LISTING", 50, categoryType);//SEARCH_PAGE_ORDERING
             } catch (Exception e) {
                 e.printStackTrace();
                 content = e.getMessage();
@@ -136,7 +136,7 @@ public class StaggeredListActivity extends BaseActivity implements AbsListView.O
             current_page += 1;
             mData = new ArrayList<GravityProducts>();
             try {
-                mData = Client.getCategoryDataFromServer("SEARCH_PAGE_ORDERING", 100, categoryType);//SEARCH_PAGE_ORDERING
+                mData = Client.getCategoryDataFromServer("MOBIL_LISTING", 50, categoryType);//SEARCH_PAGE_ORDERING
             } catch (Exception e) {
                 e.printStackTrace();
                 content = e.getMessage();

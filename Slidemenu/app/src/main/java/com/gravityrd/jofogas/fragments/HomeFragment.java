@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             protected Void doInBackground(Void... param) {
                 Log.i("HomeFragment", "ez megvan");
                 try {
-                    gravityProductsList = Client.getDataFromServer("LISTING_PAGE", 3);
+                    gravityProductsList = Client.getDataFromServer("MOBIL_MAIN_PAGE", 3);
                     categoryRecomandation = Client.getCategoryFromServer();
 
                 } catch (Exception e) {

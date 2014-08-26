@@ -26,13 +26,8 @@ public class Client {
         client.setPassword("U272KF29tO");
     }
 
-    public static List<GravityProducts> getDataFromServer(String scenario, int count) {
+    private static List<GravityProducts> getItemRecommendation(GravityRecommendationContext recomandationContext) {
         List<GravityProducts> gravityProductsList = new ArrayList<GravityProducts>();
-        GravityRecommendationContext recomandationContext = new GravityRecommendationContext();
-        recomandationContext.scenarioId = scenario;
-        recomandationContext.numberLimit = count;
-        recomandationContext.recommendationTime = (int) (System.currentTimeMillis() / 1000);
-        recomandationContext.resultNameValues = new String[]{"Title", "body", "image", "ItemType", "price", "region", "updateTimeStamp", "itemId"};
         GravityItemRecommendation itemRecommendation = null;
         try {
             itemRecommendation = client.getItemRecommendation(userID, cookieID, recomandationContext);
@@ -47,10 +42,9 @@ public class Client {
             for (GravityItem item : itemRecommendation.items) {
 
                 GravityProducts product = new GravityProducts();
-                GravityNameValue[] itemNameValues = item.nameValues;
+                product.setProductItemId(item.itemId);
 
-                for (GravityNameValue itemNameValue : itemNameValues) {
-
+                for (GravityNameValue itemNameValue : item.nameValues) {
                     if (itemNameValue.name.equalsIgnoreCase("Title")) {
                         product.setProductTitle(itemNameValue.value);
                     }
@@ -80,63 +74,26 @@ public class Client {
         return gravityProductsList;
     }
 
+    private static List<GravityProducts> getItemRecommendationFromServerWithKeyVale(String scenario, int count, GravityNameValue[] nameValues) {
+        GravityRecommendationContext recommendationContext = new GravityRecommendationContext();
+        recommendationContext.scenarioId = scenario;
+        recommendationContext.numberLimit = count;
+        recommendationContext.recommendationTime = (int) (System.currentTimeMillis() / 1000);
+        recommendationContext.resultNameValues = new String[]{"Title", "body", "image", "ItemType", "price", "region", "updateTimeStamp", "itemId"};
+        recommendationContext.nameValues = nameValues;
+        return getItemRecommendation(recommendationContext);
+
+    }
+
+
+    public static List<GravityProducts> getDataFromServer(String scenario, int count) {
+        return getItemRecommendationFromServerWithKeyVale(scenario, count, new GravityNameValue[0]);
+
+    }
+
     public static List<GravityProducts> getCategoryDataFromServer(String scenario, int count, String categoryType) {
-        List<GravityProducts> gravityProductsList = new ArrayList<GravityProducts>();
-        GravityRecommendationContext recomandationContext = new GravityRecommendationContext();
-        recomandationContext.scenarioId = scenario;
-        recomandationContext.numberLimit = count;
-        recomandationContext.recommendationTime = (int) (System.currentTimeMillis() / 1000);
-        recomandationContext.resultNameValues = new String[]{"Title", "body", "image", "ItemType", "price", "region", "updateTimeStamp"};
         GravityNameValue filter = new GravityNameValue("filter.categoryId", categoryType);
-        recomandationContext.nameValues = new GravityNameValue[]{filter};
-        GravityItemRecommendation itemRecommendation = null;
-        try {
-            itemRecommendation = client.getItemRecommendation(userID, cookieID, recomandationContext);
-        } catch (GravityRecEngException e) {
-            System.err.println("Error happened by getting the item recommendation!");
-            System.err.println("Message: " + e.getMessage() + " Fault info: " + e.faultInfo);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if (itemRecommendation != null) {
-
-            for (GravityItem item : itemRecommendation.items) {
-
-                GravityProducts product = new GravityProducts();
-                GravityNameValue[] itemNameValues = item.nameValues;
-
-                for (GravityNameValue itemNameValue : itemNameValues) {
-                    if (itemNameValue.name.equalsIgnoreCase("itemId")) {
-                        product.setProductItemId(itemNameValue.value);
-                    }
-                    if (itemNameValue.name.equalsIgnoreCase("Title")) {
-                        product.setProductTitle(itemNameValue.value);
-                    }
-                    if (itemNameValue.name.equalsIgnoreCase("body")) {
-                        product.setProductBody(itemNameValue.value);
-                    }
-                    if (itemNameValue.name.equalsIgnoreCase("image")) {
-                        product.setProductImageUrl(itemNameValue.value);
-                        System.out.println("ItemId: " + item.itemId + " ImageUrl: " + itemNameValue.value);
-                    }
-                    if (itemNameValue.name.equalsIgnoreCase("ItemType")) {
-                        product.setProductItemType(itemNameValue.value);
-                    }
-                    if (itemNameValue.name.equalsIgnoreCase("region")) {
-                        product.setProductRegion(itemNameValue.value);
-                    }
-                    if (itemNameValue.name.equalsIgnoreCase("price")) {
-                        product.setProductRegion(itemNameValue.value);
-                    }
-                    if (itemNameValue.name.equalsIgnoreCase("updateTimeStamp")) {
-                        product.setProductRegion(itemNameValue.value);
-                    }
-                }
-                gravityProductsList.add(product);
-            }
-
-        }
-        return gravityProductsList;
+        return getItemRecommendationFromServerWithKeyVale(scenario, count, new GravityNameValue[]{filter});
     }
 
 
