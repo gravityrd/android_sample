@@ -50,7 +50,6 @@
                 android:paddingRight="2dp"
                 android:layout_below="@+id/spinner_view"
                 android:paddingTop="2dp"
-                app:column_count_landscape="3"
                 app:column_count_portrait="2"
                 app:item_margin="8dp" />
             </RelativeLayout>

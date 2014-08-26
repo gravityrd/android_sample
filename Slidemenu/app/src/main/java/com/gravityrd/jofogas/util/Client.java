@@ -12,7 +12,10 @@ import com.gravityrd.recengclient.webshop.GravityClient;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Client {
     public static final String userID = "testUser1";
@@ -96,9 +99,9 @@ public class Client {
         return getItemRecommendationFromServerWithKeyVale(scenario, count, new GravityNameValue[]{filter});
     }
 
-    public static List<GravityProducts> getSimilarItem(String scenario, int count, String itemId){
-        GravityNameValue pageItemId = new GravityNameValue("currentItemId",itemId);
-        return  getItemRecommendationFromServerWithKeyVale(scenario,count,new GravityNameValue[]{pageItemId});
+    public static List<GravityProducts> getSimilarItem(String scenario, int count, String itemId) {
+        GravityNameValue pageItemId = new GravityNameValue("currentItemId", itemId);
+        return getItemRecommendationFromServerWithKeyVale(scenario, count, new GravityNameValue[]{pageItemId});
     }
 
     public static String[] getCategoryFromServer() {
@@ -135,5 +138,26 @@ public class Client {
         }
         return categoryRecomandation;
 
+    }
+
+    public static List<String> getTextSuggestion(String text, String region, String category) {
+        Collection<GravityNameValue> values = new ArrayList<GravityNameValue>();
+        values.add(new GravityNameValue("pagingOffset", "0"));
+        if (category != null) values.add(new GravityNameValue("filter.categoryId", category));
+        if (region != null) values.add(new GravityNameValue("Filter.neighborRegion", region));
+        values.add(new GravityNameValue("searchString", text));
+        List<GravityProducts> items = getItemRecommendationFromServerWithKeyVale("MOBIL_LISTING", 50, values.toArray(new GravityNameValue[values.size()]));
+        Set<String> recommends = new LinkedHashSet<String>();
+        for (GravityProducts i : items) {
+            recommends.add(i.getProductTitle());
+        }
+        int limit = 6;
+        List<String> result = new ArrayList<String>();
+        for (String r : recommends) {
+            result.add(r);
+            if (result.size() == limit)
+                break;
+        }
+        return result;
     }
 }

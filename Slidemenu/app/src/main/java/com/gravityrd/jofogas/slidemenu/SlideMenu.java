@@ -3,21 +3,15 @@ package com.gravityrd.jofogas.slidemenu;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import com.gravityrd.jofogas.R;
@@ -28,37 +22,21 @@ import com.gravityrd.jofogas.fragments.SettingsFragment;
 import com.gravityrd.jofogas.model.NavDrawerItem;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class SlideMenu {
     private final Activity activity;
     private final String[] navMenuTitles;
     private final TypedArray navMenuIcons;
+    private final Search search;
     protected DrawerLayout layout;
-    private EditText searchText;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-    private TextWatcher textWatcher = new TextWatcher() {
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            String text = searchText.getText().toString().toLowerCase(Locale.getDefault());
-        }
-
-        @Override
-        public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-        }
-
-        @Override
-        public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-        }
-
-    };
 
     public SlideMenu(Activity activity) {
         navMenuTitles = activity.getResources().getStringArray(R.array.nav_drawer_items);
         navMenuIcons = activity.getResources().obtainTypedArray(R.array.nav_drawer_icons);
         this.activity = activity;
+        search = new Search();
         drawSlideMenu();
     }
 
@@ -136,25 +114,7 @@ public class SlideMenu {
     }
 
     public void createOptions(Menu menu) {
-        searchText = (AutoCompleteTextView) menu.findItem(R.id.menu_search).getActionView();
-        searchText.addTextChangedListener(textWatcher);
-        MenuItem menuSearch = menu.findItem(R.id.menu_search);
-        menuSearch.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
-            @Override
-            public boolean onMenuItemActionExpand(MenuItem item) {
-                searchText.setText("");
-                searchText.clearFocus();
-                return true;
-            }
-
-            @Override
-            public boolean onMenuItemActionCollapse(MenuItem item) {
-
-                InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-                return true;
-            }
-        });
+        search.create(menu, activity);
 
     }
 
