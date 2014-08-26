@@ -13,11 +13,11 @@ public enum Categories implements Iterable<Category> {
 
     Categories() {
         final Integer[] categoryResourceImage = {R.drawable.kat1_ingatlan, R.drawable.kat2_jarmu,
-                R.drawable.kat3_othon, R.drawable.kat4_muszakicikk, R.drawable.kat5_sport, R.drawable.kat6_hasznalati,
-                R.drawable.kat7_munka, R.drawable.kat8_uzlet, R.drawable.kat9_egyebb};
-        final String[] categoryNames = {"Inagtalan", "Jármű", "Othon, háztartás", "Műszaki cikkek", "Szabadidő, sport",
-                "Használati tárgyak", "Állás, munka", "Üzlet ", "Egyéb"};
-        for (int position = 1; position < categoryNames.length; position++) {
+                R.drawable.kat3_othon,  R.drawable.kat5_sport, R.drawable.kat4_muszakicikk, R.drawable.kat7_munka,
+                R.drawable.kat9_egyebb, R.drawable.kat6_hasznalati, R.drawable.kat8_uzlet, };
+        final String[] categoryNames = { "Inagtalan", "Jármű", "Othon, háztartás", "Szabadidő, sport","Műszaki cikkek",
+                "Állás, munka", "Egyéb", "Használati tárgyak", "Üzlet " };
+        for (int position = 0; position < categoryNames.length; position++) {
             elements.add(new Category(categoryNames[position], categoryResourceImage[position], String.valueOf(position)));
         }
     }

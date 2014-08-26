@@ -177,10 +177,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 i = categoryViewIntent("6");
                 break;
             case R.id.rec_cat11:
-                i = categoryViewIntent("7");
+                i = categoryViewIntent("9");
                 break;
             case R.id.rec_cat12:
-                i = categoryViewIntent("9");
+                i = categoryViewIntent("7");
                 break;
         }
         if (i != null)
@@ -188,16 +188,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    private Intent singleItemViewIntent(GravityProducts gravityProducts) {
-        Log.i("Inent", "itt vagyok");
+    private Intent singleItemViewIntent(GravityProducts product) {
         Intent intent = new Intent(cont.getApplicationContext(), SingleItemActivity.class);
-        intent.putExtra("ItemId", gravityProducts.getProductItemId());
-        intent.putExtra("Title", gravityProducts.getProductTitle());
-        intent.putExtra("Body", gravityProducts.getProductBody());
-        intent.putExtra("Image", gravityProducts.getProductImageUrl());
-        intent.putExtra("Price", gravityProducts.getProductPrice());
-        intent.putExtra("Region", gravityProducts.getProductRegion());
-        intent.putExtra("Time", gravityProducts.getProductUpdateTimeStamp());
+        intent.putExtra("ItemId", product.getProductItemId());
+        intent.putExtra("Title", product.getProductTitle());
+        intent.putExtra("Body", product.getProductBody());
+        intent.putExtra("Image", product.getProductImageUrl());
+        intent.putExtra("Price", product.getProductPrice());
+        intent.putExtra("Region", product.getProductRegion());
+        intent.putExtra("Time", product.getProductUpdateTimeStamp());
         return intent;
     }
 

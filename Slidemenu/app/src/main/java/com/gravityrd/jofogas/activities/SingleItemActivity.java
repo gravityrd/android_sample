@@ -21,10 +21,7 @@ public class SingleItemActivity extends BaseActivity implements View.OnClickList
     View singleProductView;
     String tempItemId;
     private List<GravityProducts> gravityProductsList = null;
-    TextView recCategory1Text;
-    TextView recCategory2Text;
-    TextView recCategory3Text;
-    Context cont;
+    String[] region;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +30,7 @@ public class SingleItemActivity extends BaseActivity implements View.OnClickList
         Intent prodIntent = getIntent();
         Bundle bundle = prodIntent.getExtras();
 
+        region = getResources().getStringArray(R.array.location_items);
         TextView productTitle = (TextView) findViewById(R.id.product_title);
         ImageView productImage = (ImageView) findViewById(R.id.product_image);
         TextView productBody = (TextView) findViewById(R.id.value);
@@ -52,10 +50,10 @@ public class SingleItemActivity extends BaseActivity implements View.OnClickList
             productBody.setText(tempBody);
 
             Long tempPrice = (Long) bundle.get("Price");
-            productPrice.setText(tempPrice.toString());
+            productPrice.setText(tempPrice.toString() + " HUF");
 
             String tempRegion = (String) bundle.get("Region");
-            productRegion.setText(tempRegion);
+            productRegion.setText(region[Integer.parseInt(tempRegion)]);
 
             Long tempTime = (Long) bundle.get("Time");
             productTime.setText(tempTime.toString());
@@ -81,7 +79,7 @@ public class SingleItemActivity extends BaseActivity implements View.OnClickList
             @Override
             protected Void doInBackground(Void... voids) {
                 try {
-                    gravityProductsList = Client.getDataFromServer("MOBIL_ITEM_PAGE", 3);
+                    gravityProductsList = Client.getSimilarItem("MOBIL_ITEM_PAGE", 3,tempItemId);
                 } catch (Exception e) {
                     Log.e("Error", e.getMessage());
                     e.printStackTrace();

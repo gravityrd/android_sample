@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -135,7 +136,7 @@ public class SlideMenu {
     }
 
     public void createOptions(Menu menu) {
-        searchText = (EditText) menu.findItem(R.id.menu_search).getActionView();
+        searchText = (AutoCompleteTextView) menu.findItem(R.id.menu_search).getActionView();
         searchText.addTextChangedListener(textWatcher);
         MenuItem menuSearch = menu.findItem(R.id.menu_search);
         menuSearch.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
@@ -148,7 +149,7 @@ public class SlideMenu {
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
-                searchText.requestFocus();
+
                 InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
                 return true;

@@ -8,17 +8,53 @@
         android:id="@+id/frame_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <com.etsy.android.grid.StaggeredGridView
-            android:id="@+id/grid_view"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp"
-            android:paddingTop="2dp"
-            app:column_count_landscape="3"
-            app:column_count_portrait="2"
-            app:item_margin="8dp" />
+            >
+            <LinearLayout
+                android:id="@+id/spinner_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:weightSum="2.0">
+                <Spinner
+                    android:id="@+id/location_spinerId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight = "1.0"
+                    android:entries="@array/location_items"
+                    android:prompt="@string/country_prompt">
+
+                </Spinner>
+                <Spinner
+                    android:id="@+id/category_spinerId"
+                    android:layout_toEndOf="@+id/location_spinerId"
+                    android:layout_toRightOf="@+id/location_spinerId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight = "1.0"
+                    android:entries="@array/category_items"
+                    android:prompt="@string/category_prompt"
+                    >
+
+                </Spinner>
+            </LinearLayout>
+
+            <com.etsy.android.grid.StaggeredGridView
+                android:id="@+id/grid_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:layout_below="@+id/spinner_view"
+                android:paddingTop="2dp"
+                app:column_count_landscape="3"
+                app:column_count_portrait="2"
+                app:item_margin="8dp" />
+            </RelativeLayout>
+
     </FrameLayout>
 
     <ListView

@@ -7,6 +7,43 @@
     <string name="hello_world">Hello world!</string>
     <string name="drawer_open">Slider Menu Opened</string>
     <string name="drawer_close">Slider Menu Closed</string>
+    <!-- Location Spinner Items-->
+    <string-array name="location_items">
+        <item>Összes</item>
+        <item>Budapest</item>
+        <item>Bács Kiskun</item>
+        <item>Baranya</item>
+        <item>Békés</item>
+        <item>Borsod-Abaúj-Zemplén</item>
+        <item>Csongrád</item>
+        <item>Fejér</item>
+        <item>Győr-Moson-Sopron</item>
+        <item>Hajdú-Bihar</item>
+        <item>Heves</item>
+        <item>Jász-Nagykun-Szolnok</item>
+        <item>Komárom-Esztergom</item>
+        <item>Nográd</item>
+        <item>Pest</item>
+        <item>Somogy</item>
+        <item>Szabolcs-Szatmár-Bereg</item>
+        <item>Tolna</item>
+        <item>Vas</item>
+        <item>Veszprém</item>
+        <item>Zala</item>
+    </string-array>
+    <!--Category Spinner Items-->
+    <string-array name="category_items">
+        <item>Összes</item>
+        <item>Ingatlan</item>
+        <item>Jármű</item>
+        <item>Otthon/ háztartás</item>
+        <item>Számítástechnika, elektronika</item>
+        <item>Szabadídő, sport</item>
+        <item>Használati tárgyak</item>
+        <item>Állás, munka</item>
+        <item>Üzlet</item>
+        <item>Egyéb</item>
+    </string-array>
 
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">
@@ -35,5 +72,7 @@
     <string name="rec_category">Kiemelt kategóriák</string>
     <string name="category_title">Kategóriák</string>
     <string name="product_body">Fagyasztó: No Frost Hűtőtér nettó űrtartalma: 235 l Fagyasztótér nettó űrtartalma: 100 l Vezérlés: mechanikus Kompresszorok száma: 2 Hűtő: automatikus leolvasztás Klímaosztály: SN-N-ST Edzett üvegpolcok Üvegpolcok száma:3 Ajtórekeszek száma:3 Változtatható polcrendszer Átlátszó fagyasztókosarak Elpárologtató: rejtett Antibakteriális bevonat Változtatható ajtónyitás Zajszint: 42 db Méretek: Magasság:185 cm Szélesség:59,5 cm Mélység:63,2 cm</string>
+    <string name="country_prompt">Budapest</string>
+    <string name="category_prompt">Összes</string>
 
 </resources>

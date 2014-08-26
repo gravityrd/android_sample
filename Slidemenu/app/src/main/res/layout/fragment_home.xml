@@ -58,7 +58,7 @@
                     android:maxHeight="160dp"
                     android:paddingTop="2dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/kateg" />
+                    android:src="@drawable/default_image" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -126,7 +126,7 @@
                     android:maxHeight="160dp"
                     android:paddingTop="2dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/kateg2" />
+                    android:src="@drawable/default_image" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -196,7 +196,7 @@
                     android:maxHeight="160dp"
                     android:paddingTop="2dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/kateg3" />
+                    android:src="@drawable/default_image" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -281,7 +281,7 @@
                     android:maxHeight="160dp"
                     android:paddingTop="2dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/kateg" />
+                    android:src="@drawable/default_image" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -337,7 +337,7 @@
                     android:maxHeight="160dp"
                     android:paddingTop="2dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/kateg2" />
+                    android:src="@drawable/default_image" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -389,7 +389,7 @@
                     android:maxHeight="160dp"
                     android:paddingTop="2dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/kateg3" />
+                    android:src="@drawable/default_image" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -96,6 +96,10 @@ public class Client {
         return getItemRecommendationFromServerWithKeyVale(scenario, count, new GravityNameValue[]{filter});
     }
 
+    public static List<GravityProducts> getSimilarItem(String scenario, int count, String itemId){
+        GravityNameValue pageItemId = new GravityNameValue("currentItemId",itemId);
+        return  getItemRecommendationFromServerWithKeyVale(scenario,count,new GravityNameValue[]{pageItemId});
+    }
 
     public static String[] getCategoryFromServer() {
         String[] categoryRecomandation = new String[3];

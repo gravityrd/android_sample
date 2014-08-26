@@ -33,7 +33,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="300dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/kat1_ingatlan" />
+                        android:src="@drawable/default_image" />
 
                     <RelativeLayout
                         android:layout_width="fill_parent"
@@ -108,6 +108,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.0"
                         android:singleLine="false"
+                        android:gravity="end"
                         android:text="18000000 HUF"
                         android:textColor="@android:color/holo_blue_light"
                         android:textSize="18sp" />
@@ -240,7 +241,7 @@
                             android:maxHeight="160dp"
                             android:paddingTop="2dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/kateg" />
+                            android:src="@drawable/default_image" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -253,6 +254,11 @@
                             android:paddingLeft="4dp"
                             android:paddingRight="4dp">
 
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:background="#ccc" />
+
                             <TextView
                                 android:id="@+id/itempage_text1"
                                 android:layout_width="wrap_content"
@@ -264,6 +270,11 @@
                                 android:text="Eladó laptopok"
                                 android:textColor="#000"
                                 android:textSize="15sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:background="#ccc" />
 
                             <TextView
                                 android:id="@+id/itempage_price1"
@@ -298,7 +309,7 @@
                             android:maxHeight="160dp"
                             android:paddingTop="2dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/kateg2" />
+                            android:src="@drawable/default_image" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -311,6 +322,11 @@
                             android:paddingLeft="4dp"
                             android:paddingRight="4dp">
 
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:background="#ccc" />
+
                             <TextView
                                 android:id="@+id/itempage_text2"
                                 android:layout_width="wrap_content"
@@ -321,6 +337,11 @@
                                 android:singleLine="true"
                                 android:text="Eladó telefonok"
                                 android:textSize="15sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:background="#ccc" />
 
                             <TextView
                                 android:id="@+id/itempage_price2"
@@ -357,7 +378,7 @@
                             android:maxHeight="160dp"
                             android:paddingTop="2dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/kateg3" />
+                            android:src="@drawable/default_image" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -370,6 +391,11 @@
                             android:paddingLeft="4dp"
                             android:paddingRight="4dp">
 
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:background="#ccc" />
+
                             <TextView
                                 android:id="@+id/itempage_text3"
                                 android:layout_width="wrap_content"
@@ -380,6 +406,11 @@
                                 android:singleLine="true"
                                 android:text="Házikészitésü hangfal eladó"
                                 android:textSize="15sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:background="#ccc" />
 
                             <TextView
                                 android:id="@+id/itempage_price3"

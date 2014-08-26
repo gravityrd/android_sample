@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.widget.AbsListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.etsy.android.grid.StaggeredGridView;
@@ -31,6 +32,7 @@ public class StaggeredListActivity extends BaseActivity implements AbsListView.O
     private List<GravityProducts> mData;
     private String categoryType;
     private String content = null;
+    private Spinner locationSpinner, categorySpinner;
 
 
     @Override
@@ -72,6 +74,7 @@ public class StaggeredListActivity extends BaseActivity implements AbsListView.O
                 new loadMoreItems().execute();
             }
         }
+
 
     }
 
