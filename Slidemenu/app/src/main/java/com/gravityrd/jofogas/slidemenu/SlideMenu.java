@@ -115,7 +115,6 @@ public class SlideMenu {
 
     public void createOptions(Menu menu) {
         search.create(menu, activity);
-
     }
 
     public void postCreate() {
@@ -133,6 +132,7 @@ public class SlideMenu {
         // Handle action bar actions click
         switch (item.getItemId()) {
             case R.id.menu_search:
+                search.focus();
                 return true;
             default:
                 return activity.onOptionsItemSelected(item);

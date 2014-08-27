@@ -1,5 +1,7 @@
 package com.gravityrd.jofogas.activities;
 
+import android.app.Activity;
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -78,8 +80,31 @@ public class StaggeredListActivity extends BaseActivity implements AbsListView.O
 
     }
 
+    private static Intent getItemIntent(GravityProduct product) {
+        Intent intent = new Intent(App.getContext(), SingleItemActivity.class);
+        intent.putExtra("item", product);
+        return intent;
+    }
+
+
+    public static void startSingleView(Activity activity, GravityProduct gravityProduct) {
+        activity.startActivity(getItemIntent(gravityProduct));
+    }
+
+    public static void startSingleView(Fragment fragment, GravityProduct gravityProduct) {
+        fragment.startActivity(getItemIntent(gravityProduct));
+    }
+    public static void startStaggered(Activity activity, List<GravityProduct> items) {
+
+    }
+
+    public static void getRecommendationItems(String categoryType){
+
+    }
+
 
     private class GetCategoryContentTask extends AsyncTask<Void, Void, Void> {
+
 
         @Override
         protected void onPreExecute() {
@@ -127,8 +152,6 @@ public class StaggeredListActivity extends BaseActivity implements AbsListView.O
                 mGridView.setAdapter(mAdapter);
             }
             loadingMore = false;
-
-
         }
     }
 

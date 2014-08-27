@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.gravityrd.jofogas.R;
 import com.gravityrd.jofogas.activities.SingleItemActivity;
+import com.gravityrd.jofogas.activities.StaggeredListActivity;
 import com.gravityrd.jofogas.model.GravityProduct;
 import com.gravityrd.jofogas.util.Client;
 
@@ -34,6 +35,10 @@ public class Search {
 
     public Search(Activity activity) {
         this.activity = activity;
+    }
+
+    public void focus() {
+        auto.requestFocus();
     }
 
     private static class SearchSuggestions {
@@ -79,6 +84,8 @@ public class Search {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     final String text = v.getEditableText().toString();
                     Client.addSearchAsync(text);
+                    StaggeredListActivity.startStaggered(activity, items);
+
                     isActive = false;
                 }
                 return false;
