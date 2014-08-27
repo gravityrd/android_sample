@@ -1,8 +1,8 @@
 package com.gravityrd.jofogas.fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,26 +18,21 @@ import com.gravityrd.jofogas.activities.SingleItemActivity;
 import com.gravityrd.jofogas.activities.StaggeredListActivity;
 import com.gravityrd.jofogas.model.Categories;
 import com.gravityrd.jofogas.model.Category;
-import com.gravityrd.jofogas.model.GravityProducts;
+import com.gravityrd.jofogas.model.GravityProduct;
 import com.gravityrd.jofogas.util.Client;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
-public class HomeFragment extends Fragment implements View.OnClickListener {
+public class HomeFragment extends Fragment {
     ProgressDialog progressDialog;
-    Context cont;
-    TextView recCategory1Text;
-    TextView recCategory2Text;
-    TextView recCategory3Text;
 
-    private List<GravityProducts> gravityProductsList = null;
+    private List<GravityProduct> gravityProductList = null;
     private String[] categoryRecomandation = null;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.i("HomeFragment", "OK");
         final View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        cont = getActivity();
+        final Fragment fragment = this;
         new AsyncTask<Void, Void, Void>() {
 
             @Override
@@ -54,7 +49,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             protected Void doInBackground(Void... param) {
                 Log.i("HomeFragment", "ez megvan");
                 try {
-                    gravityProductsList = Client.getDataFromServer("MOBIL_MAIN_PAGE", 3);
+                    gravityProductList = Client.getDataFromServer("MOBIL_MAIN_PAGE", 3);
                     categoryRecomandation = Client.getCategoryFromServer();
 
                 } catch (Exception e) {
@@ -64,140 +59,79 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 return null;
             }
 
+            void setItem(final GravityProduct item, int viewTitleId, int viewPriceId, int viewImageId, int viewItemId) {
+                try {
+                    TextView textTitle1 = (TextView) rootView.findViewById(viewTitleId);
+                    textTitle1.setText(item.getProductTitle());
+
+                    TextView textPrice1 = (TextView) rootView.findViewById(viewPriceId);
+                    textPrice1.setText(item.getProductPrice() + " HUF");
+
+                    ImageView imageView1 = (ImageView) rootView.findViewById(viewImageId);
+                    ImageLoader.getInstance().displayImage(item.getProductImageUrl(), imageView1);
+
+                    rootView.findViewById(viewItemId).setOnClickListener(new View.OnClickListener() {
+                        public void onClick(View v) {
+                            SingleItemActivity.startSingleView(fragment, item);
+                        }
+                    });
+                } catch (Exception e) {
+                    Log.e("failed to show item" + item, e.getMessage());
+                }
+            }
+
+            void setCategory(final String category, int viewTitleId, int viewImageId, int viewItemId) {
+                try {
+                    Category c1 = Categories.INSTANCE.get(Integer.parseInt(category));
+                    TextView recCategory1Text = (TextView) rootView.findViewById(viewTitleId);
+                    recCategory1Text.setText(c1.name);
+                    ImageView recCategory1Image = (ImageView) rootView.findViewById(viewImageId);
+                    recCategory1Image.setImageResource(c1.imageResourceId);
+                    setClickForCategory(rootView, viewItemId, category);
+                } catch (Exception e) {
+                    Log.e("failed to show category " + category, e.getMessage());
+                }
+
+            }
+
+
             @Override
             protected void onPostExecute(Void result) {
-                try {
-                    TextView textTitle1 = (TextView) rootView.findViewById(R.id.prod_title1);
-                    textTitle1.setText(gravityProductsList.get(0).getProductTitle());
-                    TextView textTitle2 = (TextView) rootView.findViewById(R.id.prod_title2);
-                    textTitle2.setText(gravityProductsList.get(1).getProductTitle());
-                    TextView textTitle3 = (TextView) rootView.findViewById(R.id.prod_title3);
-                    textTitle3.setText(gravityProductsList.get(2).getProductTitle());
-                    TextView textPrice1 = (TextView) rootView.findViewById(R.id.price1);
-                    textPrice1.setText(gravityProductsList.get(0).getProductPrice() + " HUF");
-                    TextView textPrice2 = (TextView) rootView.findViewById(R.id.price2);
-                    textPrice2.setText(gravityProductsList.get(1).getProductPrice() + " HUF");
-                    TextView textPrice3 = (TextView) rootView.findViewById(R.id.price3);
-                    textPrice3.setText(gravityProductsList.get(2).getProductPrice() + " HUF");
-                    ImageView imageView1 = (ImageView) rootView.findViewById(R.id.imageView1);
-                    ImageLoader.getInstance().displayImage(gravityProductsList.get(0).getProductImageUrl(), imageView1);
-                    ImageView imageView2 = (ImageView) rootView.findViewById(R.id.imageView2);
-                    ImageLoader.getInstance().displayImage(gravityProductsList.get(1).getProductImageUrl(), imageView2);
-                    ImageView imageView3 = (ImageView) rootView.findViewById(R.id.imageView3);
-                    ImageLoader.getInstance().displayImage(gravityProductsList.get(2).getProductImageUrl(), imageView3);
-
-                    Category c1 = Categories.INSTANCE.get(Integer.parseInt(categoryRecomandation[0]));
-                    recCategory1Text = (TextView) rootView.findViewById(R.id.rec_cat1_text);
-                    recCategory1Text.setText(c1.name);
-                    ImageView recCategory1Image = (ImageView) rootView.findViewById(R.id.reccategory1);
-                    recCategory1Image.setImageResource(c1.imageResourceId);
-
-                    Category c2 = Categories.INSTANCE.get(Integer.parseInt(categoryRecomandation[1]));
-                    recCategory2Text = (TextView) rootView.findViewById(R.id.rec_cat2_text);
-                    recCategory2Text.setText(c2.name);
-                    ImageView recCategory2Image = (ImageView) rootView.findViewById(R.id.reccategory2);
-                    recCategory2Image.setImageResource(c2.imageResourceId);
-
-                    Category c3 = Categories.INSTANCE.get(Integer.parseInt(categoryRecomandation[2]));
-                    recCategory3Text = (TextView) rootView.findViewById(R.id.rec_cat3_text);
-                    recCategory3Text.setText(c3.name);
-                    ImageView recCategory3Image = (ImageView) rootView.findViewById(R.id.reccategory3);
-                    recCategory3Image.setImageResource(c3.imageResourceId);
-                } catch (Exception e) {
-                    Log.e("itt vagyok", e.getMessage());
-                }
+                if (gravityProductList.size() > 0)
+                    setItem(gravityProductList.get(0), R.id.prod_title1, R.id.price1, R.id.imageView1, R.id.rec_prod1);
+                if (gravityProductList.size() > 1)
+                    setItem(gravityProductList.get(1), R.id.prod_title2, R.id.price2, R.id.imageView2, R.id.rec_prod2);
+                if (gravityProductList.size() > 2)
+                    setItem(gravityProductList.get(2), R.id.prod_title3, R.id.price3, R.id.imageView3, R.id.rec_prod3);
+                if (categoryRecomandation.length > 0)
+                    setCategory(categoryRecomandation[0], R.id.rec_cat1_text, R.id.reccategory1, R.id.rec_cat1);
+                if (categoryRecomandation.length > 1)
+                    setCategory(categoryRecomandation[1], R.id.rec_cat2_text, R.id.reccategory2, R.id.rec_cat2);
+                if (categoryRecomandation.length > 2)
+                    setCategory(categoryRecomandation[2], R.id.rec_cat3_text, R.id.reccategory3, R.id.rec_cat3);
                 progressDialog.dismiss();
             }
         }.execute();
-        rootView.findViewById(R.id.rec_prod1).setOnClickListener(this);
-        rootView.findViewById(R.id.rec_prod2).setOnClickListener(this);
-        rootView.findViewById(R.id.rec_prod3).setOnClickListener(this);
-        rootView.findViewById(R.id.rec_cat1).setOnClickListener(this);
-        rootView.findViewById(R.id.rec_cat2).setOnClickListener(this);
-        rootView.findViewById(R.id.rec_cat3).setOnClickListener(this);
-        rootView.findViewById(R.id.rec_cat4).setOnClickListener(this);
-        rootView.findViewById(R.id.rec_cat5).setOnClickListener(this);
-        rootView.findViewById(R.id.rec_cat6).setOnClickListener(this);
-        rootView.findViewById(R.id.rec_cat7).setOnClickListener(this);
-        rootView.findViewById(R.id.rec_cat8).setOnClickListener(this);
-        rootView.findViewById(R.id.rec_cat9).setOnClickListener(this);
-        rootView.findViewById(R.id.rec_cat10).setOnClickListener(this);
-        rootView.findViewById(R.id.rec_cat11).setOnClickListener(this);
-        rootView.findViewById(R.id.rec_cat12).setOnClickListener(this);
+        setClickForCategory(rootView, R.id.rec_cat4, "1");
+        setClickForCategory(rootView, R.id.rec_cat5, "2");
+        setClickForCategory(rootView, R.id.rec_cat6, "3");
+        setClickForCategory(rootView, R.id.rec_cat7, "5");
+        setClickForCategory(rootView, R.id.rec_cat8, "4");
+        setClickForCategory(rootView, R.id.rec_cat9, "8");
+        setClickForCategory(rootView, R.id.rec_cat10, "6");
+        setClickForCategory(rootView, R.id.rec_cat11, "9");
+        setClickForCategory(rootView, R.id.rec_cat12, "7");
+
         return rootView;
     }
 
-
-    @Override
-    public void onClick(View v) {
-        Intent i = null;
-        switch (v.getId()) {
-            case R.id.rec_prod1:
-                i = singleItemViewIntent(gravityProductsList.get(0));
-                break;
-            case R.id.rec_prod2:
-                i = singleItemViewIntent(gravityProductsList.get(1));
-                break;
-            case R.id.rec_prod3:
-                i = singleItemViewIntent(gravityProductsList.get(2));
-                break;
-            case R.id.rec_cat1:
-                i = categoryViewIntent(categoryRecomandation[0]);
-                break;
-            case R.id.rec_cat2:
-                i = categoryViewIntent(categoryRecomandation[1]);
-                break;
-            case R.id.rec_cat3:
-                i = categoryViewIntent(categoryRecomandation[2]);
-                break;
-            case R.id.rec_cat4:
-                i = categoryViewIntent("1");
-                break;
-            case R.id.rec_cat5:
-                i = categoryViewIntent("2");
-                break;
-
-            case R.id.rec_cat6:
-                i = categoryViewIntent("3");
-                break;
-
-            case R.id.rec_cat7:
-                i = categoryViewIntent("5");
-                break;
-
-            case R.id.rec_cat8:
-                i = categoryViewIntent("4");
-                break;
-
-            case R.id.rec_cat9:
-                i = categoryViewIntent("8");
-                break;
-
-            case R.id.rec_cat10:
-                i = categoryViewIntent("6");
-                break;
-            case R.id.rec_cat11:
-                i = categoryViewIntent("9");
-                break;
-            case R.id.rec_cat12:
-                i = categoryViewIntent("7");
-                break;
-        }
-        if (i != null)
-            startActivity(i);
-
-    }
-
-    private Intent singleItemViewIntent(GravityProducts product) {
-        Intent intent = new Intent(cont.getApplicationContext(), SingleItemActivity.class);
-        intent.putExtra("ItemId", product.getProductItemId());
-        intent.putExtra("Title", product.getProductTitle());
-        intent.putExtra("Body", product.getProductBody());
-        intent.putExtra("Image", product.getProductImageUrl());
-        intent.putExtra("Price", product.getProductPrice());
-        intent.putExtra("Region", product.getProductRegion());
-        intent.putExtra("Time", product.getProductUpdateTimeStamp());
-        return intent;
+    void setClickForCategory(View view, int viewItemId, final String category) {
+        view.findViewById(viewItemId).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = categoryViewIntent(category);
+                startActivity(i);
+            }
+        });
     }
 
     private Intent categoryViewIntent(String category) {

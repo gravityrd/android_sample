@@ -36,7 +36,7 @@ public class SlideMenu {
         navMenuTitles = activity.getResources().getStringArray(R.array.nav_drawer_items);
         navMenuIcons = activity.getResources().obtainTypedArray(R.array.nav_drawer_icons);
         this.activity = activity;
-        search = new Search();
+        search = new Search(activity);
         drawSlideMenu();
     }
 

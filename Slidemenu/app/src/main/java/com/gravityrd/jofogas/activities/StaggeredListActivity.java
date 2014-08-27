@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.etsy.android.grid.StaggeredGridView;
 import com.gravityrd.jofogas.R;
-import com.gravityrd.jofogas.model.GravityProducts;
+import com.gravityrd.jofogas.model.GravityProduct;
 import com.gravityrd.jofogas.util.Client;
 import com.gravityrd.jofogas.util.SampleAdapter;
 
@@ -29,7 +29,7 @@ public class StaggeredListActivity extends BaseActivity implements AbsListView.O
     private boolean loadingMore = true;
     private boolean stopLoading = false;
     private SampleAdapter mAdapter;
-    private List<GravityProducts> mData;
+    private List<GravityProduct> mData;
     private String categoryType;
     private String content = null;
     private Spinner locationSpinner, categorySpinner;
@@ -94,7 +94,7 @@ public class StaggeredListActivity extends BaseActivity implements AbsListView.O
         @Override
         protected Void doInBackground(Void... params) {
             loadingMore = true;
-            mData = new ArrayList<GravityProducts>();
+            mData = new ArrayList<GravityProduct>();
             try {
                 mData = Client.getCategoryDataFromServer("MOBIL_LISTING", 50, categoryType);//SEARCH_PAGE_ORDERING
             } catch (Exception e) {
@@ -137,7 +137,7 @@ public class StaggeredListActivity extends BaseActivity implements AbsListView.O
         protected Void doInBackground(Void... params) {
             loadingMore = true;
             current_page += 1;
-            mData = new ArrayList<GravityProducts>();
+            mData = new ArrayList<GravityProduct>();
             try {
                 mData = Client.getCategoryDataFromServer("MOBIL_LISTING", 50, categoryType);//SEARCH_PAGE_ORDERING
             } catch (Exception e) {

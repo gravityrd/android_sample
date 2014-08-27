@@ -1,6 +1,7 @@
 package com.gravityrd.jofogas.activities;
 
-import android.content.Context;
+import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -8,57 +9,56 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gravityrd.jofogas.R;
-import com.gravityrd.jofogas.model.GravityProducts;
+import com.gravityrd.jofogas.model.GravityProduct;
 import com.gravityrd.jofogas.util.Client;
 import com.gravityrd.jofogas.util.ExpandablePanel;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
-public class SingleItemActivity extends BaseActivity implements View.OnClickListener {
+public class SingleItemActivity extends BaseActivity {
     View singleProductView;
-    String tempItemId;
-    private List<GravityProducts> gravityProductsList = null;
-    String[] region;
+    private List<GravityProduct> similarItems = null;
+    private GravityProduct item = null;
+    final static String[] region = App.getContext().getResources().getStringArray(R.array.location_items);
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    void setProduct(GravityProduct item) {
+        this.item = item;
+        TextView productTitle = (TextView) findViewById(R.id.product_title);
+        productTitle.setText(item.getProductTitle());
 
+        TextView productBody = (TextView) findViewById(R.id.value);
+        productBody.setText(item.getProductBody());
+
+        ImageView productImage = (ImageView) findViewById(R.id.product_image);
+        ImageLoader.getInstance().displayImage(item.getProductImageUrl(), productImage);
+
+        TextView productPrice = (TextView) findViewById(R.id.product_price);
+        productPrice.setText(item.getProductPrice() + " HUF");
+
+        TextView productRegion = (TextView) findViewById(R.id.product_region);
+        productRegion.setText(region[Integer.parseInt(item.getProductRegion())]);
+
+        TextView productTime = (TextView) findViewById(R.id.text);
+        productTime.setText(item.getProductUpdateTimeStamp() + "");
+        Client.addViewItemAsync(item);
+        getSimilarRecommendations();
+    }
+
+    void loadPassedOptions() {
         Intent prodIntent = getIntent();
         Bundle bundle = prodIntent.getExtras();
-
-        region = getResources().getStringArray(R.array.location_items);
-        TextView productTitle = (TextView) findViewById(R.id.product_title);
-        ImageView productImage = (ImageView) findViewById(R.id.product_image);
-        TextView productBody = (TextView) findViewById(R.id.value);
-        TextView productPrice = (TextView) findViewById(R.id.product_price);
-        TextView productRegion = (TextView) findViewById(R.id.product_region);
-        TextView productTime = (TextView) findViewById(R.id.text);
-
         if (bundle != null) {
-            tempItemId = (String) bundle.get("ItemId");
-            String tempTitle = (String) bundle.get("Title");
-            productTitle.setText(tempTitle);
-
-            String tempImage = (String) bundle.get("Image");
-            ImageLoader.getInstance().displayImage(tempImage, productImage);
-
-            String tempBody = (String) bundle.get("Body");
-            productBody.setText(tempBody);
-
-            Long tempPrice = (Long) bundle.get("Price");
-            productPrice.setText(tempPrice.toString() + " HUF");
-
-            String tempRegion = (String) bundle.get("Region");
-            productRegion.setText(region[Integer.parseInt(tempRegion)]);
-
-            Long tempTime = (Long) bundle.get("Time");
-            productTime.setText(tempTime.toString());
+            GravityProduct item = bundle.getParcelable("item");
+            if (item != null)
+                setProduct(item);
         }
+    }
 
+    void setExpandable() {
         ExpandablePanel panel = (ExpandablePanel) findViewById(R.id.foo);
         singleProductView = findViewById(R.id.singleproductsview);
         panel.setOnExpandListener(new ExpandablePanel.OnExpandListener() {
@@ -75,87 +75,77 @@ public class SingleItemActivity extends BaseActivity implements View.OnClickList
                 imw.setImageResource(R.drawable.ic_action_expand);
             }
         });
+    }
+
+    void getSimilarRecommendations() {
+        final Activity activity = this;
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
                 try {
-                    gravityProductsList = Client.getSimilarItem("MOBIL_ITEM_PAGE", 3,tempItemId);
+                    similarItems = Client.getSimilarItem("MOBIL_ITEM_PAGE", 3, item.getProductItemId());
                 } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                     Log.e("Error", e.getMessage());
                     e.printStackTrace();
                 }
                 return null;
             }
 
-            @Override
-            protected void onPostExecute(Void result) {
-                try{
-                    TextView textView1 = (TextView) findViewById(R.id.itempage_text1);
-                    textView1.setText(gravityProductsList.get(0).getProductTitle());
-                    TextView textView2 = (TextView) findViewById(R.id.itempage_text2);
-                    textView2.setText(gravityProductsList.get(1).getProductTitle());
-                    TextView textView3 = (TextView) findViewById(R.id.itempage_text3);
-                    textView3.setText(gravityProductsList.get(2).getProductTitle());
-                    TextView textPrice1 = (TextView) findViewById(R.id.itempage_price1);
-                    textPrice1.setText(gravityProductsList.get(0).getProductPrice() + " HUF");
-                    TextView textPrice2 = (TextView) findViewById(R.id.itempage_price2);
-                    textPrice2.setText(gravityProductsList.get(1).getProductPrice() + " HUF");
-                    TextView textPrice3 = (TextView) findViewById(R.id.itempage_price3);
-                    textPrice3.setText(gravityProductsList.get(2).getProductPrice() + " HUF");
-                    ImageView imageView1 = (ImageView) findViewById(R.id.itempage_imageView1);
-                    ImageLoader.getInstance().displayImage(gravityProductsList.get(0).getProductImageUrl(), imageView1);
-                    ImageView imageView2 = (ImageView) findViewById(R.id.itempage_imageView2);
-                    ImageLoader.getInstance().displayImage(gravityProductsList.get(1).getProductImageUrl(), imageView2);
-                    ImageView imageView3 = (ImageView) findViewById(R.id.itempage_imageView3);
-                    ImageLoader.getInstance().displayImage(gravityProductsList.get(2).getProductImageUrl(), imageView3);
+            void handleItem(final GravityProduct item, int viewTitleId, int viewPriceId, int viewImageId, int viewItemId) {
+                try {
+                    TextView title = (TextView) findViewById(viewTitleId);
+                    title.setText(item.getProductTitle());
+                    TextView price = (TextView) findViewById(viewPriceId);
+                    price.setText(item.getProductPrice() + " HUF");
+                    ImageView image = (ImageView) findViewById(viewImageId);
+                    ImageLoader.getInstance().displayImage(item.getProductImageUrl(), image);
+                    findViewById(viewItemId).setOnClickListener(new View.OnClickListener() {
+                        public void onClick(View v) {
+                            startSingleView(activity, item);
+                        }
+                    });
 
-
-                }catch (Exception e){
+                } catch (Exception e) {
                     Log.e("itt vagyok", e.getMessage());
                 }
+
+            }
+
+            @Override
+            protected void onPostExecute(Void result) {
+                if (similarItems == null) return;
+                if (similarItems.size() > 0)
+                    handleItem(similarItems.get(0), R.id.itempage_text1, R.id.itempage_price1, R.id.itempage_imageView1, R.id.productpage_item1);
+                if (similarItems.size() > 1)
+                    handleItem(similarItems.get(1), R.id.itempage_text2, R.id.itempage_price2, R.id.itempage_imageView2, R.id.productpage_item2);
+                if (similarItems.size() > 2)
+                    handleItem(similarItems.get(2), R.id.itempage_text3, R.id.itempage_price3, R.id.itempage_imageView3, R.id.productpage_item3);
             }
         }.execute();
-
-        findViewById(R.id.productpage_item1).setOnClickListener( this);
-        findViewById(R.id.productpage_item2).setOnClickListener( this);
-        findViewById(R.id.productpage_item3).setOnClickListener( this);
-
-
-
     }
 
-    public void onClick(View v) {
-    Intent i = null;
-        switch (v.getId()) {
-            case R.id.productpage_item1:
-                i = singleItemViewIntent(gravityProductsList.get(0));
-                break;
-            case R.id.productpage_item2:
-                i = singleItemViewIntent(gravityProductsList.get(1));
-                break;
-            case R.id.productpage_item3:
-                i = singleItemViewIntent(gravityProductsList.get(2));
-                break;
-        }
-        if (i != null)
-            startActivity(i);
-
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        loadPassedOptions();
+        setExpandable();
     }
 
-    private Intent singleItemViewIntent(GravityProducts gravityProducts) {
-        Log.i("Inent", "itt vagyok");
-        Intent intent = new Intent(getApplicationContext(), SingleItemActivity.class);
-        intent.putExtra("ItemId", gravityProducts.getProductItemId());
-        intent.putExtra("Title", gravityProducts.getProductTitle());
-        intent.putExtra("Body", gravityProducts.getProductBody());
-        intent.putExtra("Image", gravityProducts.getProductImageUrl());
-        intent.putExtra("Price", gravityProducts.getProductPrice());
-        intent.putExtra("Region", gravityProducts.getProductRegion());
-        intent.putExtra("Time", gravityProducts.getProductUpdateTimeStamp());
+    public static void startSingleView(Activity activity, GravityProduct gravityProduct) {
+        activity.startActivity(getItemIntent(gravityProduct));
+    }
+
+    public static void startSingleView(Fragment fragment, GravityProduct gravityProduct) {
+        fragment.startActivity(getItemIntent(gravityProduct));
+    }
+
+    private static Intent getItemIntent(GravityProduct product) {
+        Intent intent = new Intent(App.getContext(), SingleItemActivity.class);
+        intent.putExtra("item", product);
         return intent;
+
     }
-
-
 
     @Override
     protected int getView() {

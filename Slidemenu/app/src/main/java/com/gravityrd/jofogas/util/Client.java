@@ -1,8 +1,11 @@
 package com.gravityrd.jofogas.util;
 
+import android.os.AsyncTask;
 import android.provider.Settings;
+import android.util.Log;
 
-import com.gravityrd.jofogas.model.GravityProducts;
+import com.gravityrd.jofogas.model.GravityProduct;
+import com.gravityrd.receng.web.webshop.jsondto.GravityEvent;
 import com.gravityrd.receng.web.webshop.jsondto.GravityItem;
 import com.gravityrd.receng.web.webshop.jsondto.GravityItemRecommendation;
 import com.gravityrd.receng.web.webshop.jsondto.GravityNameValue;
@@ -13,9 +16,7 @@ import com.gravityrd.recengclient.webshop.GravityClient;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Client {
     public static final String userID = "testUser1";
@@ -29,8 +30,8 @@ public class Client {
         client.setPassword("U272KF29tO");
     }
 
-    private static List<GravityProducts> getItemRecommendation(GravityRecommendationContext recomandationContext) {
-        List<GravityProducts> gravityProductsList = new ArrayList<GravityProducts>();
+    private static List<GravityProduct> getItemRecommendation(GravityRecommendationContext recomandationContext) {
+        List<GravityProduct> gravityProductList = new ArrayList<GravityProduct>();
         GravityItemRecommendation itemRecommendation = null;
         try {
             itemRecommendation = client.getItemRecommendation(userID, cookieID, recomandationContext);
@@ -44,7 +45,7 @@ public class Client {
 
             for (GravityItem item : itemRecommendation.items) {
 
-                GravityProducts product = new GravityProducts();
+                GravityProduct product = new GravityProduct();
                 product.setProductItemId(item.itemId);
 
                 for (GravityNameValue itemNameValue : item.nameValues) {
@@ -70,14 +71,14 @@ public class Client {
                         product.setProductUpdateTimeStamp(Long.parseLong(itemNameValue.value));
                     }
                 }
-                gravityProductsList.add(product);
+                gravityProductList.add(product);
             }
 
         }
-        return gravityProductsList;
+        return gravityProductList;
     }
 
-    private static List<GravityProducts> getItemRecommendationFromServerWithKeyVale(String scenario, int count, GravityNameValue[] nameValues) {
+    private static List<GravityProduct> getItemRecommendationFromServerWithKeyVale(String scenario, int count, GravityNameValue[] nameValues) {
         GravityRecommendationContext recommendationContext = new GravityRecommendationContext();
         recommendationContext.scenarioId = scenario;
         recommendationContext.numberLimit = count;
@@ -89,17 +90,17 @@ public class Client {
     }
 
 
-    public static List<GravityProducts> getDataFromServer(String scenario, int count) {
+    public static List<GravityProduct> getDataFromServer(String scenario, int count) {
         return getItemRecommendationFromServerWithKeyVale(scenario, count, new GravityNameValue[0]);
 
     }
 
-    public static List<GravityProducts> getCategoryDataFromServer(String scenario, int count, String categoryType) {
+    public static List<GravityProduct> getCategoryDataFromServer(String scenario, int count, String categoryType) {
         GravityNameValue filter = new GravityNameValue("filter.categoryId", categoryType);
         return getItemRecommendationFromServerWithKeyVale(scenario, count, new GravityNameValue[]{filter});
     }
 
-    public static List<GravityProducts> getSimilarItem(String scenario, int count, String itemId) {
+    public static List<GravityProduct> getSimilarItem(String scenario, int count, String itemId) {
         GravityNameValue pageItemId = new GravityNameValue("currentItemId", itemId);
         return getItemRecommendationFromServerWithKeyVale(scenario, count, new GravityNameValue[]{pageItemId});
     }
@@ -140,24 +141,45 @@ public class Client {
 
     }
 
-    public static List<String> getTextSuggestion(String text, String region, String category) {
+    public static List<GravityProduct> getTextSuggestion(String text, String region, String category) {
         Collection<GravityNameValue> values = new ArrayList<GravityNameValue>();
         values.add(new GravityNameValue("pagingOffset", "0"));
         if (category != null) values.add(new GravityNameValue("filter.categoryId", category));
         if (region != null) values.add(new GravityNameValue("Filter.neighborRegion", region));
         values.add(new GravityNameValue("searchString", text));
-        List<GravityProducts> items = getItemRecommendationFromServerWithKeyVale("MOBIL_LISTING", 50, values.toArray(new GravityNameValue[values.size()]));
-        Set<String> recommends = new LinkedHashSet<String>();
-        for (GravityProducts i : items) {
-            recommends.add(i.getProductTitle());
-        }
-        int limit = 6;
-        List<String> result = new ArrayList<String>();
-        for (String r : recommends) {
-            result.add(r);
-            if (result.size() == limit)
-                break;
-        }
-        return result;
+        return getItemRecommendationFromServerWithKeyVale("MOBIL_LISTING", 50, values.toArray(new GravityNameValue[values.size()]));
+    }
+
+    public static void sendEventAsync(final GravityEvent event) {
+        event.cookieId = cookieID;
+        event.userId = userID;
+        new AsyncTask<Void, Void, Void>() {
+
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    client.addEvents(new GravityEvent[]{event}, true);
+                } catch (GravityRecEngException e) {
+                    Log.e("event", "failed to send event", e);
+                } catch (IOException e) {
+                    Log.e("event", "failed to send event with IO", e);
+                }
+                return null;
+            }
+        }.execute();
+    }
+
+    public static void addViewItemAsync(GravityProduct product) {
+        GravityEvent event = new GravityEvent();
+        event.eventType = "VIEW";
+        event.itemId = product.getProductItemId();
+        sendEventAsync(event);
+    }
+
+    public static void addSearchAsync(String text) {
+        GravityEvent event = new GravityEvent();
+        event.eventType = "SEARCH";
+        event.nameValues = new GravityNameValue[]{new GravityNameValue("searchString", text)};
+        sendEventAsync(event);
     }
 }

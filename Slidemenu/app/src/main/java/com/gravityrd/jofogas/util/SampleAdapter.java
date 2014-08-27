@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.gravityrd.jofogas.R;
 import com.gravityrd.jofogas.activities.SingleItemActivity;
-import com.gravityrd.jofogas.model.GravityProducts;
+import com.gravityrd.jofogas.model.GravityProduct;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -21,14 +21,14 @@ public class SampleAdapter extends BaseAdapter {
     protected ImageLoader imageLoader;
     Context context;
     LayoutInflater inflater;
-    private List<GravityProducts> details = null;
-    private ArrayList<GravityProducts> arrayList;
+    private List<GravityProduct> details = null;
+    private ArrayList<GravityProduct> arrayList;
 
-    public SampleAdapter(Context context, List<GravityProducts> detalis) {
+    public SampleAdapter(Context context, List<GravityProduct> detalis) {
         this.context = context;
         this.details = detalis;
         inflater = LayoutInflater.from(context);
-        this.arrayList = new ArrayList<GravityProducts>();
+        this.arrayList = new ArrayList<GravityProduct>();
         this.arrayList.addAll(detalis);
         imageLoader = ImageLoader.getInstance();
     }
