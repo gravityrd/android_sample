@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.widget.AbsListView;
+import android.widget.Toast;
 
 import com.etsy.android.grid.StaggeredGridView;
 import com.gravityrd.jofogas.R;
@@ -17,16 +18,17 @@ import com.gravityrd.jofogas.util.SampleAdapter;
 import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
 
-public class StaggeredListActivity extends BaseActivity implements AbsListView.OnScrollListener {
+public class StaggeredListActivity extends BaseActivity {
 
     private static final String categoryMeta = "category";
     private static final String searchMeta = "searchString";
     private static final String initialItemsMeta = "initialItemsMeta";
     private ArrayList<GravityProduct> items = new ArrayList<GravityProduct>();
     private String searchString;
+    private boolean emptyMore = false;
 
     public static void startCategoryAsync(final Activity a, final String categoryType) {
-        final Intent i = new Intent();
+        final Intent i = new Intent(App.getContext(), StaggeredListActivity.class);
         i.putExtra(categoryMeta, categoryType);
 
         final ProgressDialog progressDialog = new ProgressDialog(a);
@@ -61,13 +63,13 @@ public class StaggeredListActivity extends BaseActivity implements AbsListView.O
     }
 
     public static void startSearchAsync(final Activity a, final String searchText, ArrayList<GravityProduct> items) {
-        final Intent i = new Intent();
+        final Intent i = new Intent(App.getContext(), StaggeredListActivity.class);
         i.putExtra(searchMeta, searchText);
         i.putParcelableArrayListExtra(initialItemsMeta, items);
         a.startActivity(i);
     }
 
-    private StaggeredGridView mGridView;
+    private SampleAdapter listAdapter;
 
     private enum Type {
         CATEGORY, SEARCH
@@ -80,7 +82,25 @@ public class StaggeredListActivity extends BaseActivity implements AbsListView.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mGridView = (StaggeredGridView) findViewById(R.id.grid_view);
+        StaggeredGridView mGridView = (StaggeredGridView) findViewById(R.id.grid_view);
+        mGridView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if(emptyMore) return;
+                int lastInScreen = firstVisibleItem + visibleItemCount;
+                if (lastInScreen >= totalItemCount) {
+                    boolean acquired = available.tryAcquire();
+                    if (acquired) {
+                        loadMoreAsync();
+                    }
+                }
+            }
+        });
 
         Intent categoryIntent = getIntent();
         Bundle bundle = categoryIntent.getExtras();
@@ -95,13 +115,8 @@ public class StaggeredListActivity extends BaseActivity implements AbsListView.O
             }
             items = bundle.getParcelableArrayList(initialItemsMeta);
         }
-        update();
-    }
-
-    void update() {
-        int currentPosition = mGridView.getFirstVisiblePosition();
-        mGridView.setAdapter(new SampleAdapter(StaggeredListActivity.this, items));
-        mGridView.setSelection(currentPosition + 1);
+        listAdapter = new SampleAdapter(StaggeredListActivity.this, items);
+        mGridView.setAdapter(listAdapter);
     }
 
 
@@ -115,44 +130,39 @@ public class StaggeredListActivity extends BaseActivity implements AbsListView.O
         super.onSaveInstanceState(outState);
     }
 
-    @Override
-    public void onScrollStateChanged(final AbsListView view, final int scrollState) {
-    }
-
     private final Semaphore available = new Semaphore(1, true);
 
-    @Override
-    public void onScroll(final AbsListView view, final int firstVisibleItem, final int visibleItemCount, final int totalItemCount) {
-        int lastInScreen = firstVisibleItem + visibleItemCount;
-        if (lastInScreen >= totalItemCount) {
-            boolean acquired = available.tryAcquire();
-            if (acquired) {
-                loadMoreAsync();
-            }
-        }
-    }
-
     public void loadMoreAsync() {
-        new AsyncTask<Void, Void, Void>() {
+        new AsyncTask<Void, Void, ArrayList<GravityProduct>>() {
             @Override
-            protected Void doInBackground(Void... params) {
+            protected void onPreExecute() {
+                Toast.makeText(getApplicationContext(), "loading more items ", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            protected ArrayList<GravityProduct> doInBackground(Void... params) {
 
                 ArrayList<GravityProduct> result = new ArrayList<GravityProduct>();
                 switch (type) {
                     case CATEGORY:
-                        result = Client.getCategoryDataFromServer("MOBILE_LISTING", 50, categoryType, items.size());
+                        result = Client.getCategoryDataFromServer("MOBIL_LISTING", 50, categoryType, items.size());
                         break;
                     case SEARCH:
                         result = Client.getTextSuggestion(searchString, null, null, items.size());
                 }
-                items.addAll(result);
+                if(result.size() == 0)
+                    emptyMore = true;
                 available.release();
-                return null;
+                return result;
             }
 
             @Override
-            protected void onPostExecute(Void result) {
-                update();
+            protected void onPostExecute(ArrayList<GravityProduct> result) {
+                if (result.size() > 0) {
+                    items.addAll(result);
+                    listAdapter.notifyDataSetChanged();
+                }
+                Toast.makeText(getApplicationContext(), "loaded " + result.size() + " items, overall " + items.size(), Toast.LENGTH_SHORT).show();
             }
         }.execute();
     }
