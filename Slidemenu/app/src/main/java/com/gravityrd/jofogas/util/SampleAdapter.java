@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.gravityrd.jofogas.R;
 import com.gravityrd.jofogas.activities.SingleItemActivity;
+import com.gravityrd.jofogas.activities.StaggeredListActivity;
 import com.gravityrd.jofogas.model.GravityProduct;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -18,19 +19,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SampleAdapter extends BaseAdapter {
-    protected ImageLoader imageLoader;
+    protected ImageLoader imageLoader = ImageLoader.getInstance();
     Context context;
     LayoutInflater inflater;
-    private List<GravityProduct> details = null;
-    private ArrayList<GravityProduct> arrayList;
+    private ArrayList<GravityProduct> details = null;
+    public StaggeredListActivity activtiy;
 
-    public SampleAdapter(Context context, List<GravityProduct> detalis) {
+    public SampleAdapter(Context context, ArrayList<GravityProduct> detalis) {
         this.context = context;
         this.details = detalis;
         inflater = LayoutInflater.from(context);
-        this.arrayList = new ArrayList<GravityProduct>();
-        this.arrayList.addAll(detalis);
-        imageLoader = ImageLoader.getInstance();
     }
 
     @Override
@@ -61,23 +59,18 @@ public class SampleAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.titleProduct.setText(details.get(position).getProductTitle());
-        holder.priceProduct.setText(details.get(position).getProductPrice() + "HUF");
-        String tempImg;
-        tempImg = details.get(position).getProductImageUrl();
+        final GravityProduct item = details.get(position);
+
+        holder.titleProduct.setText(item.getProductTitle());
+        holder.priceProduct.setText(item.getProductPrice() + "HUF");
+
+        String tempImg = item.getProductImageUrl();
         imageLoader.displayImage(tempImg, holder.imageProduct);
+
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, SingleItemActivity.class);
-                intent.putExtra("ItemId", details.get(position).getProductItemId());
-                intent.putExtra("Title", details.get(position).getProductTitle());
-                intent.putExtra("Body", details.get(position).getProductBody());
-                intent.putExtra("Image", details.get(position).getProductImageUrl());
-                intent.putExtra("Price", details.get(position).getProductPrice());
-                intent.putExtra("Region", details.get(position).getProductRegion());
-                intent.putExtra("Time", details.get(position).getProductUpdateTimeStamp());
-                context.startActivity(intent);
+                SingleItemActivity.startSingleView(activtiy, item);
             }
         });
         return convertView;

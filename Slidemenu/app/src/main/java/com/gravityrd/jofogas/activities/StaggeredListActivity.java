@@ -6,7 +6,11 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.etsy.android.grid.StaggeredGridView;
@@ -26,6 +30,10 @@ public class StaggeredListActivity extends BaseActivity {
     private ArrayList<GravityProduct> items = new ArrayList<GravityProduct>();
     private String searchString;
     private boolean emptyMore = false;
+    Spinner categorySpinner, regionSpinner;
+    private static int categoryTypeFromSpinner = 0;
+    private static int  regionTypeFromSpinner = 0;
+
 
     public static void startCategoryAsync(final Activity a, final String categoryType) {
         final Intent i = new Intent(App.getContext(), StaggeredListActivity.class);
@@ -115,8 +123,14 @@ public class StaggeredListActivity extends BaseActivity {
             }
             items = bundle.getParcelableArrayList(initialItemsMeta);
         }
+        categorySpinner = (Spinner) findViewById(R.id.category_spinerId);
+        categoryTypeFromSpinner = categorySpinner.getSelectedItemPosition();
+
+        regionSpinner = (Spinner) findViewById(R.id.location_spinerId);
         listAdapter = new SampleAdapter(StaggeredListActivity.this, items);
+        listAdapter.activtiy = this;
         mGridView.setAdapter(listAdapter);
+
     }
 
 
