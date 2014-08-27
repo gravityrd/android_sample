@@ -63,16 +63,21 @@ public class Search {
 
             @Override
             protected Void doInBackground(Void... voids) {
-                List<String> res;
+                final List<String> res;
                 if (text == null) {
                     res = new ArrayList<String>();
                 } else {
                     res = Client.getTextSuggestion(text, null, null);
                 }
-                ArrayAdapter<String> adp = new ArrayAdapter<String>(activity, android.R.layout.simple_dropdown_item_1line, res);
-                adp.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-                auto.setThreshold(1);
-                auto.setAdapter(adp);
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ArrayAdapter<String> adp = new ArrayAdapter<String>(activity, android.R.layout.simple_dropdown_item_1line, res);
+                        adp.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+                        auto.setThreshold(1);
+                        auto.setAdapter(adp);
+                    }
+                });
                 return null;
             }
         }.execute();
