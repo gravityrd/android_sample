@@ -30,8 +30,8 @@ public class Client {
         client.setPassword("U272KF29tO");
     }
 
-    private static List<GravityProduct> getItemRecommendation(GravityRecommendationContext recomandationContext) {
-        List<GravityProduct> gravityProductList = new ArrayList<GravityProduct>();
+    private static ArrayList<GravityProduct> getItemRecommendation(GravityRecommendationContext recomandationContext) {
+        ArrayList<GravityProduct> gravityProductList = new ArrayList<GravityProduct>();
         GravityItemRecommendation itemRecommendation = null;
         try {
             itemRecommendation = client.getItemRecommendation(userID, cookieID, recomandationContext);
@@ -78,7 +78,7 @@ public class Client {
         return gravityProductList;
     }
 
-    private static List<GravityProduct> getItemRecommendationFromServerWithKeyVale(String scenario, int count, GravityNameValue[] nameValues) {
+    private static ArrayList<GravityProduct> getItemRecommendationFromServerWithKeyVale(String scenario, int count, GravityNameValue[] nameValues) {
         GravityRecommendationContext recommendationContext = new GravityRecommendationContext();
         recommendationContext.scenarioId = scenario;
         recommendationContext.numberLimit = count;
@@ -95,9 +95,10 @@ public class Client {
 
     }
 
-    public static List<GravityProduct> getCategoryDataFromServer(String scenario, int count, String categoryType) {
+    public static ArrayList<GravityProduct> getCategoryDataFromServer(String scenario, int count, String categoryType, int offset) {
         GravityNameValue filter = new GravityNameValue("filter.categoryId", categoryType);
-        return getItemRecommendationFromServerWithKeyVale(scenario, count, new GravityNameValue[]{filter});
+        GravityNameValue of = new GravityNameValue("pagingOffset", "" + offset);
+        return getItemRecommendationFromServerWithKeyVale(scenario, count, new GravityNameValue[]{filter, of});
     }
 
     public static List<GravityProduct> getSimilarItem(String scenario, int count, String itemId) {
@@ -141,9 +142,9 @@ public class Client {
 
     }
 
-    public static List<GravityProduct> getTextSuggestion(String text, String region, String category) {
+    public static ArrayList<GravityProduct> getTextSuggestion(String text, String region, String category, int offset) {
         Collection<GravityNameValue> values = new ArrayList<GravityNameValue>();
-        values.add(new GravityNameValue("pagingOffset", "0"));
+        values.add(new GravityNameValue("pagingOffset", "" + offset));
         if (category != null) values.add(new GravityNameValue("filter.categoryId", category));
         if (region != null) values.add(new GravityNameValue("Filter.neighborRegion", region));
         values.add(new GravityNameValue("searchString", text));

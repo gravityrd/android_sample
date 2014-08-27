@@ -1,9 +1,7 @@
 package com.gravityrd.jofogas.fragments;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -72,7 +70,7 @@ public class HomeFragment extends Fragment {
 
                     rootView.findViewById(viewItemId).setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
-                            SingleItemActivity.startSingleView(fragment, item);
+                            SingleItemActivity.startSingleView(getActivity(), item);
                         }
                     });
                 } catch (Exception e) {
@@ -128,18 +126,10 @@ public class HomeFragment extends Fragment {
     void setClickForCategory(View view, int viewItemId, final String category) {
         view.findViewById(viewItemId).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = categoryViewIntent(category);
-                startActivity(i);
+                StaggeredListActivity.startCategoryAsync(getActivity(), category);
             }
         });
     }
-
-    private Intent categoryViewIntent(String category) {
-        Intent i = new Intent(getActivity(), StaggeredListActivity.class);
-        i.putExtra("category", category);
-        return i;
-    }
-
 
 }
 

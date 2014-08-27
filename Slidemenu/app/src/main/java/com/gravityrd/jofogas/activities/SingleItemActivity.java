@@ -1,7 +1,6 @@
 package com.gravityrd.jofogas.activities;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -133,19 +132,11 @@ public class SingleItemActivity extends BaseActivity {
     }
 
     public static void startSingleView(Activity activity, GravityProduct gravityProduct) {
-        activity.startActivity(getItemIntent(gravityProduct));
-    }
-
-    public static void startSingleView(Fragment fragment, GravityProduct gravityProduct) {
-        fragment.startActivity(getItemIntent(gravityProduct));
-    }
-
-    private static Intent getItemIntent(GravityProduct product) {
         Intent intent = new Intent(App.getContext(), SingleItemActivity.class);
-        intent.putExtra("item", product);
-        return intent;
-
+        intent.putExtra("item", gravityProduct);
+        activity.startActivity(intent);
     }
+
 
     @Override
     protected int getView() {

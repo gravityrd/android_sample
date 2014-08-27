@@ -30,7 +30,7 @@ import java.util.Set;
 public class Search {
     private final Activity activity;
     private AutoCompleteTextView auto;
-    private List<GravityProduct> items;
+    private ArrayList<GravityProduct> items;
     private boolean isActive = false;
 
     public Search(Activity activity) {
@@ -84,7 +84,7 @@ public class Search {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     final String text = v.getEditableText().toString();
                     Client.addSearchAsync(text);
-                    StaggeredListActivity.startStaggered(activity, items);
+                    StaggeredListActivity.startSearchAsync(activity, text, items);
 
                     isActive = false;
                 }
@@ -136,7 +136,7 @@ public class Search {
                     res = new ArrayList<SearchSuggestions>();
                     items = new ArrayList<GravityProduct>();
                 } else {
-                    items = Client.getTextSuggestion(text, null, null);
+                    items = Client.getTextSuggestion(text, null, null, 0);
                     res = suggestions(items);
                 }
                 Log.i("text", "got items " + text + " " + items.size());

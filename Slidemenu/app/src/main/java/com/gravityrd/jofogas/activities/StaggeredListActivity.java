@@ -1,16 +1,12 @@
 package com.gravityrd.jofogas.activities;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
+import android.support.annotation.NonNull;
 import android.widget.AbsListView;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.etsy.android.grid.StaggeredGridView;
 import com.gravityrd.jofogas.R;
@@ -19,38 +15,95 @@ import com.gravityrd.jofogas.util.Client;
 import com.gravityrd.jofogas.util.SampleAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.Semaphore;
 
 public class StaggeredListActivity extends BaseActivity implements AbsListView.OnScrollListener {
 
-    private static final String TAG = "StaggeredGridActivity";
-    int current_page = 1;
-    boolean error = false;
-    ProgressDialog progressDialog;
+    private static final String categoryMeta = "category";
+    private static final String searchMeta = "searchString";
+    private static final String initialItemsMeta = "initialItemsMeta";
+    private ArrayList<GravityProduct> items = new ArrayList<GravityProduct>();
+    private String searchString;
+
+    public static void startCategoryAsync(final Activity a, final String categoryType) {
+        final Intent i = new Intent();
+        i.putExtra(categoryMeta, categoryType);
+
+        final ProgressDialog progressDialog = new ProgressDialog(a);
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog.setTitle("Jófogás!");
+                progressDialog.setMessage("Tőltés folyamatban...");
+                progressDialog.setIndeterminate(false);
+                progressDialog.show();
+            }
+
+            @Override
+            protected Void doInBackground(Void... params) {
+                ArrayList<GravityProduct> result = new ArrayList<GravityProduct>();
+                try {
+                    result = Client.getCategoryDataFromServer("MOBIL_LISTING", 50, categoryType, 0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                i.putParcelableArrayListExtra(initialItemsMeta, result);
+                a.startActivity(i);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void result) {
+                progressDialog.dismiss();
+            }
+        }.execute();
+    }
+
+    public static void startSearchAsync(final Activity a, final String searchText, ArrayList<GravityProduct> items) {
+        final Intent i = new Intent();
+        i.putExtra(searchMeta, searchText);
+        i.putParcelableArrayListExtra(initialItemsMeta, items);
+        a.startActivity(i);
+    }
+
     private StaggeredGridView mGridView;
-    private boolean loadingMore = true;
-    private boolean stopLoading = false;
-    private SampleAdapter mAdapter;
-    private List<GravityProduct> mData;
+
+    private enum Type {
+        CATEGORY, SEARCH
+    }
+
+    private Type type;
     private String categoryType;
-    private String content = null;
-    private Spinner locationSpinner, categorySpinner;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mGridView = (StaggeredGridView) findViewById(R.id.grid_view);
 
         Intent categoryIntent = getIntent();
         Bundle bundle = categoryIntent.getExtras();
         if (bundle != null) {
-            if (bundle.keySet().contains("category")) {
-                categoryType = (String) bundle.get("category");
+            if (bundle.keySet().contains(categoryMeta)) {
+                categoryType = (String) bundle.get(categoryMeta);
+                type = Type.CATEGORY;
             }
+            if (bundle.keySet().contains(searchMeta)) {
+                searchString = (String) bundle.get(searchMeta);
+                type = Type.SEARCH;
+            }
+            items = bundle.getParcelableArrayList(initialItemsMeta);
         }
-
-        new GetCategoryContentTask().execute();
+        update();
     }
+
+    void update() {
+        int currentPosition = mGridView.getFirstVisiblePosition();
+        mGridView.setAdapter(new SampleAdapter(StaggeredListActivity.this, items));
+        mGridView.setSelection(currentPosition + 1);
+    }
+
 
     @Override
     protected int getView() {
@@ -58,126 +111,49 @@ public class StaggeredListActivity extends BaseActivity implements AbsListView.O
     }
 
     @Override
-    protected void onSaveInstanceState(final Bundle outState) {
+    protected void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
     }
 
     @Override
     public void onScrollStateChanged(final AbsListView view, final int scrollState) {
-        Log.d(TAG, "onScrollStateChanged:" + scrollState);
     }
+
+    private final Semaphore available = new Semaphore(1, true);
 
     @Override
     public void onScroll(final AbsListView view, final int firstVisibleItem, final int visibleItemCount, final int totalItemCount) {
-
         int lastInScreen = firstVisibleItem + visibleItemCount;
-        if ((lastInScreen == totalItemCount) && !(loadingMore)) {
-            if (stopLoading == false) {
-                new loadMoreItems().execute();
+        if (lastInScreen >= totalItemCount) {
+            boolean acquired = available.tryAcquire();
+            if (acquired) {
+                loadMoreAsync();
             }
         }
-
-
     }
 
-    private static Intent getItemIntent(GravityProduct product) {
-        Intent intent = new Intent(App.getContext(), SingleItemActivity.class);
-        intent.putExtra("item", product);
-        return intent;
-    }
+    public void loadMoreAsync() {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
 
-
-    public static void startSingleView(Activity activity, GravityProduct gravityProduct) {
-        activity.startActivity(getItemIntent(gravityProduct));
-    }
-
-    public static void startSingleView(Fragment fragment, GravityProduct gravityProduct) {
-        fragment.startActivity(getItemIntent(gravityProduct));
-    }
-    public static void startStaggered(Activity activity, List<GravityProduct> items) {
-
-    }
-
-    public static void getRecommendationItems(String categoryType){
-
-    }
-
-
-    private class GetCategoryContentTask extends AsyncTask<Void, Void, Void> {
-
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            progressDialog = new ProgressDialog(StaggeredListActivity.this);
-            progressDialog.setTitle("Jófogás!");
-            progressDialog.setMessage("Tőltés folyamatban...");
-            progressDialog.setIndeterminate(false);
-            progressDialog.show();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            loadingMore = true;
-            mData = new ArrayList<GravityProduct>();
-            try {
-                mData = Client.getCategoryDataFromServer("MOBIL_LISTING", 50, categoryType);//SEARCH_PAGE_ORDERING
-            } catch (Exception e) {
-                e.printStackTrace();
-                content = e.getMessage();
-                error = true;
+                ArrayList<GravityProduct> result = new ArrayList<GravityProduct>();
+                switch (type) {
+                    case CATEGORY:
+                        result = Client.getCategoryDataFromServer("MOBILE_LISTING", 50, categoryType, items.size());
+                        break;
+                    case SEARCH:
+                        result = Client.getTextSuggestion(searchString, null, null, items.size());
+                }
+                items.addAll(result);
+                available.release();
+                return null;
             }
-            return null;
-        }
 
-        protected void onCancelled() {
-            progressDialog.dismiss();
-            Toast toast = Toast.makeText(StaggeredListActivity.this,
-                    "Hiba tőrtént az adatok lekérésében, " +
-                            "a szerver nem elérhető vagy nincs engedélyezve az Internetes hozáférés", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.TOP, 25, 400);
-            toast.show();
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            progressDialog.dismiss();
-            if (error) {
-                Toast toast = Toast.makeText(StaggeredListActivity.this, content, Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.TOP, 25, 400);
-                toast.show();
-            } else {
-                mGridView = (StaggeredGridView) findViewById(R.id.grid_view);
-                mAdapter = new SampleAdapter(StaggeredListActivity.this, mData);
-                mGridView.setAdapter(mAdapter);
+            @Override
+            protected void onPostExecute(Void result) {
+                update();
             }
-            loadingMore = false;
-        }
-    }
-
-    private class loadMoreItems extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... params) {
-            loadingMore = true;
-            current_page += 1;
-            mData = new ArrayList<GravityProduct>();
-            try {
-                mData = Client.getCategoryDataFromServer("MOBIL_LISTING", 50, categoryType);//SEARCH_PAGE_ORDERING
-            } catch (Exception e) {
-                e.printStackTrace();
-                content = e.getMessage();
-                error = true;
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            int currentPosition = mGridView.getFirstVisiblePosition();
-            mAdapter = new SampleAdapter(StaggeredListActivity.this, mData);
-            mGridView.setAdapter(mAdapter);
-            mGridView.setSelection(currentPosition + 1);
-            loadingMore = false;
-        }
+        }.execute();
     }
 }
