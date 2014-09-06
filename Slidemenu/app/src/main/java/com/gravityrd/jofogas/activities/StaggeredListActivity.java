@@ -83,7 +83,7 @@ public class StaggeredListActivity extends BaseActivity {
         CATEGORY, SEARCH
     }
 
-    private Type type;
+    private Type type = Type.CATEGORY;
     private String categoryType;
 
 
@@ -178,6 +178,6 @@ public class StaggeredListActivity extends BaseActivity {
                 }
                 Toast.makeText(getApplicationContext(), "loaded " + result.size() + " items, overall " + items.size(), Toast.LENGTH_SHORT).show();
             }
-        }.execute();
+    }.execute();
     }
 }

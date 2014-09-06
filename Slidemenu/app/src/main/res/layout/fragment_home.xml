@@ -3,14 +3,14 @@
     android:id="@+id/home_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="#eaeaea"
     android:clickable="true">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@android:color/white"
+        android:background="#efefef"
         android:gravity="center|left"
         android:orientation="vertical"
         android:paddingBottom="@dimen/activity_vertical_margin"
@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="3.0"
-            android:background="#ffffff"
+            android:background="#efefef"
             android:clickable="false"
             android:orientation="horizontal">
 
@@ -52,23 +52,22 @@
                     android:layout_width="200dp"
                     android:layout_height="150dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="3dp"
+
                     android:adjustViewBounds="true"
                     android:clickable="false"
                     android:maxHeight="160dp"
-                    android:paddingTop="2dp"
+
                     android:scaleType="centerCrop"
                     android:src="@drawable/default_image" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/imageView1"
                     android:layout_marginBottom="4dp"
                     android:layout_marginTop="12dp"
                     android:orientation="vertical"
-                    android:paddingLeft="4dp"
-                    android:paddingRight="4dp">
+>
 
                     <View
                         android:layout_width="match_parent"
@@ -83,9 +82,12 @@
                         android:clickable="false"
                         android:gravity="center"
                         android:singleLine="true"
-                        android:text="Nike 28,5 -es vadi új kislány sportcipő"
+                        android:text="Nincs cim"
                         android:textColor="#000000"
-                        android:textSize="15sp" />
+                        android:textSize="12sp"
+                        android:paddingLeft="4dp"
+                        android:paddingRight="0dp"
+                        android:lines="2"/>
 
                     <View
                         android:layout_width="match_parent"
@@ -98,9 +100,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
                         android:clickable="false"
-                        android:text="15000 HUF"
+                        android:singleLine="true"
+                        android:text="Ár nem elérhető"
                         android:textColor="@android:color/holo_blue_light"
-                        android:textSize="15sp" />
+                        android:textSize="12sp"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="4dp"/>
                 </LinearLayout>
             </RelativeLayout>
 
@@ -154,7 +159,8 @@
                         android:singleLine="true"
                         android:text="Nike 28,5 -es vadi új kislány sportcipő"
                         android:textColor="#000000"
-                        android:textSize="15sp" />
+                        android:textSize="12sp"
+                        android:lines="2"/>
 
                     <View
                         android:layout_width="match_parent"
