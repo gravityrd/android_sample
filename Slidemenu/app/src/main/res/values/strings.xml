@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Slider Menu</string>
+    <string name="app_name">Jófogás Demo</string>
     <string name="slide_message">Pick one!</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
@@ -48,25 +48,20 @@
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">
         <item>Home</item>
-        <item>Favorites</item>
         <item>Last visited</item>
-        <item>Settings</item>
-        <item>Exit</item>
     </string-array>
 
     <!-- Nav Drawer List Item Icons -->
     <!-- Keep them in order as the titles are in -->
     <array name="nav_drawer_icons">
         <item>@drawable/ic_home</item>
-        <item>@drawable/ic_favorites</item>
         <item>@drawable/ic_last_visited</item>
-        <item>@drawable/ic_settings</item>
         <item>@drawable/ic_drawer</item>
     </array>
 
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
-    <string name="search_hint">Fogas</string>
+    <string name="search_hint">Keress..</string>
     <string name="cat_ingatlan">Ingatlan</string>
     <string name="rec_porducts">Ajánlott termékeink</string>
     <string name="rec_category">Kiemelt kategóriák</string>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <solid android:color="#ffffff"></solid>
+    <solid android:color="#FFF"></solid>
     <stroke
         android:width="0.5dp"
         android:color="#ccc"></stroke>
@@ -10,5 +10,5 @@
         android:left="0.5dp"
         android:right="0.5dp"
         android:top="0.5dp"></padding>
-    <corners android:radius="0dp"></corners>
+    <corners android:radius="5dp"></corners>
 </shape>

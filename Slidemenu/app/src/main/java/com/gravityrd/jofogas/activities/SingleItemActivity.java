@@ -2,6 +2,7 @@ package com.gravityrd.jofogas.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,8 +14,11 @@ import android.widget.Toast;
 import com.gravityrd.jofogas.R;
 import com.gravityrd.jofogas.model.GravityProduct;
 import com.gravityrd.jofogas.util.Client;
+import com.gravityrd.jofogas.util.DynamicHImageView;
 import com.gravityrd.jofogas.util.ExpandablePanel;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 import java.util.List;
 
@@ -25,6 +29,7 @@ public class SingleItemActivity extends BaseActivity {
     final static String[] region = App.getContext().getResources().getStringArray(R.array.location_items);
 
     void setProduct(GravityProduct item) {
+        DisplayImageOptions options = new DisplayImageOptions.Builder().bitmapConfig(Bitmap.Config.RGB_565).imageScaleType(ImageScaleType.IN_SAMPLE_INT).build();
         this.item = item;
         TextView productTitle = (TextView) findViewById(R.id.product_title);
         productTitle.setText(item.getProductTitle());
@@ -33,7 +38,7 @@ public class SingleItemActivity extends BaseActivity {
         productBody.setText(item.getProductBody());
 
         ImageView productImage = (ImageView) findViewById(R.id.product_image);
-        ImageLoader.getInstance().displayImage(item.getProductImageUrl(), productImage);
+        ImageLoader.getInstance().displayImage(item.getProductImageUrl(), productImage,options);
 
         TextView productPrice = (TextView) findViewById(R.id.product_price);
         productPrice.setText(item.getProductPrice() + " HUF");
@@ -97,8 +102,9 @@ public class SingleItemActivity extends BaseActivity {
                     title.setText(item.getProductTitle());
                     TextView price = (TextView) findViewById(viewPriceId);
                     price.setText(item.getProductPrice() + " HUF");
-                    ImageView image = (ImageView) findViewById(viewImageId);
-                    ImageLoader.getInstance().displayImage(item.getProductImageUrl(), image);
+                    DynamicHImageView image = (DynamicHImageView) findViewById(viewImageId);
+                    DisplayImageOptions options = new DisplayImageOptions.Builder().bitmapConfig(Bitmap.Config.RGB_565).imageScaleType(ImageScaleType.IN_SAMPLE_INT).build();
+                    ImageLoader.getInstance().displayImage(item.getProductImageUrl(), image, options );
                     findViewById(viewItemId).setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
                             startSingleView(activity, item);

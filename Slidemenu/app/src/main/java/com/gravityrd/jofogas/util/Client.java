@@ -94,6 +94,9 @@ public class Client {
         return getItemRecommendationFromServerWithKeyVale(scenario, count, new GravityNameValue[0]);
 
     }
+    public static ArrayList<GravityProduct> getVisitedDataFromServer(String scenario, int count){
+        return getItemRecommendationFromServerWithKeyVale(scenario, count, new GravityNameValue[0]);
+    }
 
     public static ArrayList<GravityProduct> getCategoryDataFromServer(String scenario, int count, String categoryType, int offset) {
         GravityNameValue filter = new GravityNameValue("filter.categoryId", categoryType);

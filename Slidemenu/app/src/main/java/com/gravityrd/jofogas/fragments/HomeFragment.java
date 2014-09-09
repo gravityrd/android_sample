@@ -2,6 +2,7 @@ package com.gravityrd.jofogas.fragments;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.etsy.android.grid.util.DynamicHeightImageView;
 import com.gravityrd.jofogas.R;
 import com.gravityrd.jofogas.activities.SingleItemActivity;
 import com.gravityrd.jofogas.activities.StaggeredListActivity;
@@ -18,7 +20,10 @@ import com.gravityrd.jofogas.model.Categories;
 import com.gravityrd.jofogas.model.Category;
 import com.gravityrd.jofogas.model.GravityProduct;
 import com.gravityrd.jofogas.util.Client;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.gravityrd.jofogas.util.DynamicHImageView;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 import java.util.List;
 
@@ -65,8 +70,11 @@ public class HomeFragment extends Fragment {
                     TextView textPrice1 = (TextView) rootView.findViewById(viewPriceId);
                     textPrice1.setText(item.getProductPrice() + " HUF");
 
-                    ImageView imageView1 = (ImageView) rootView.findViewById(viewImageId);
-                    ImageLoader.getInstance().displayImage(item.getProductImageUrl(), imageView1);
+                    DynamicHImageView imageView1 = (DynamicHImageView) rootView.findViewById(viewImageId);
+                    DisplayImageOptions options = new DisplayImageOptions.Builder().bitmapConfig(Bitmap.Config.RGB_565).imageScaleType(ImageScaleType.IN_SAMPLE_INT).build();
+                    ImageLoader.getInstance().displayImage(item.getProductImageUrl(), imageView1, options);
+
+
 
                     rootView.findViewById(viewItemId).setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
@@ -83,7 +91,7 @@ public class HomeFragment extends Fragment {
                     Category c1 = Categories.INSTANCE.get(Integer.parseInt(category));
                     TextView recCategory1Text = (TextView) rootView.findViewById(viewTitleId);
                     recCategory1Text.setText(c1.name);
-                    ImageView recCategory1Image = (ImageView) rootView.findViewById(viewImageId);
+                    DynamicHImageView recCategory1Image = (DynamicHImageView) rootView.findViewById(viewImageId);
                     recCategory1Image.setImageResource(c1.imageResourceId);
                     setClickForCategory(rootView, viewItemId, category);
                 } catch (Exception e) {

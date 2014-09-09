@@ -15,10 +15,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.gravityrd.jofogas.R;
-import com.gravityrd.jofogas.fragments.FavoritesFragment;
+import com.gravityrd.jofogas.activities.StaggeredListActivity;
 import com.gravityrd.jofogas.fragments.HomeFragment;
 import com.gravityrd.jofogas.fragments.LastVisitedFragment;
-import com.gravityrd.jofogas.fragments.SettingsFragment;
 import com.gravityrd.jofogas.model.NavDrawerItem;
 
 import java.util.ArrayList;
@@ -82,13 +81,7 @@ public class SlideMenu {
                 fragment = new HomeFragment();
                 break;
             case 1:
-                fragment = new FavoritesFragment();
-                break;
-            case 2:
-                fragment = new LastVisitedFragment();
-                break;
-            case 3:
-                fragment = new SettingsFragment();
+               StaggeredListActivity.startVisitedAsync(activity,"MOBIL_LAST_VISITED");
                 break;
             default:
                 break;

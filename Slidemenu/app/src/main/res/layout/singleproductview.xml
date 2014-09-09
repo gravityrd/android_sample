@@ -22,7 +22,10 @@
                 android:layout_height="wrap_content"
                 android:background="#FFF"
                 android:orientation="vertical"
-                android:paddingBottom="12dp">
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:paddingTop="@dimen/activity_vertical_margin">
 
                 <RelativeLayout
                     android:layout_width="fill_parent"
@@ -57,10 +60,6 @@
 
                 </RelativeLayout>
 
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="5dp"
-                    android:background="@android:color/darker_gray" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -231,28 +230,28 @@
                         android:layout_weight="1.0"
                         android:background="@drawable/proba">
 
-                        <ImageView
+                        <com.gravityrd.jofogas.util.DynamicHImageView
                             android:id="@+id/itempage_imageView1"
                             android:layout_width="200dp"
                             android:layout_height="150dp"
                             android:layout_centerHorizontal="true"
-                            android:layout_marginLeft="3dp"
+                            android:layout_marginLeft="0.5dp"
+                            android:layout_marginRight="0.5dp"
+                            android:layout_marginTop="0.5dp"
                             android:adjustViewBounds="true"
                             android:maxHeight="160dp"
-                            android:paddingTop="2dp"
                             android:scaleType="centerCrop"
                             android:src="@drawable/default_image" />
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/itempage_imageView1"
                             android:layout_marginBottom="4dp"
                             android:layout_marginTop="12dp"
                             android:duplicateParentState="true"
                             android:orientation="vertical"
-                            android:paddingLeft="4dp"
-                            android:paddingRight="4dp">
+>
 
                             <View
                                 android:layout_width="match_parent"
@@ -266,7 +265,8 @@
                                 android:layout_marginBottom="4dp"
                                 android:gravity="center"
                                 android:singleLine="true"
-
+                                android:paddingLeft="4dp"
+                                android:paddingRight="0dp"
                                 android:text="Eladó laptopok"
                                 android:textColor="#000"
                                 android:textSize="15sp" />
@@ -282,6 +282,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right"
                                 android:text="150000 HUF"
+                                android:paddingLeft="0dp"
+                                android:paddingRight="4dp"
                                 android:textColor="@android:color/holo_blue_light"
                                 android:textSize="15sp" />
                         </LinearLayout>
@@ -298,29 +300,29 @@
                         android:clickable="true"
                         android:focusable="true">
 
-                        <ImageView
+                        <com.gravityrd.jofogas.util.DynamicHImageView
                             android:id="@+id/itempage_imageView2"
                             android:layout_width="200dp"
                             android:layout_height="150dp"
                             android:layout_centerHorizontal="true"
-                            android:layout_marginLeft="3dp"
+                            android:layout_marginLeft="0.5dp"
+                            android:layout_marginRight="0.5dp"
+                            android:layout_marginTop="0.5dp"
                             android:adjustViewBounds="true"
                             android:duplicateParentState="true"
                             android:maxHeight="160dp"
-                            android:paddingTop="2dp"
                             android:scaleType="centerCrop"
                             android:src="@drawable/default_image" />
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/itempage_imageView2"
                             android:layout_marginBottom="4dp"
                             android:layout_marginTop="12dp"
                             android:duplicateParentState="true"
                             android:orientation="vertical"
-                            android:paddingLeft="4dp"
-                            android:paddingRight="4dp">
+>
 
                             <View
                                 android:layout_width="match_parent"
@@ -333,6 +335,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="4dp"
                                 android:duplicateParentState="true"
+                                android:paddingLeft="4dp"
+                                android:paddingRight="0dp"
                                 android:gravity="center"
                                 android:singleLine="true"
                                 android:text="Eladó telefonok"
@@ -349,6 +353,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right"
                                 android:duplicateParentState="true"
+                                android:paddingLeft="0dp"
+                                android:paddingRight="4dp"
                                 android:text="65000 HUF"
                                 android:textColor="@android:color/holo_blue_light"
                                 android:textSize="15sp" />
@@ -367,29 +373,29 @@
                         android:clickable="true"
                         android:focusable="true">
 
-                        <ImageView
+                        <com.gravityrd.jofogas.util.DynamicHImageView
                             android:id="@+id/itempage_imageView3"
                             android:layout_width="200dp"
                             android:layout_height="150dp"
                             android:layout_centerHorizontal="true"
-                            android:layout_marginLeft="3dp"
+                            android:layout_marginLeft="0.5dp"
+                            android:layout_marginRight="0.5dp"
+                            android:layout_marginTop="0.5dp"
                             android:adjustViewBounds="true"
                             android:duplicateParentState="true"
                             android:maxHeight="160dp"
-                            android:paddingTop="2dp"
                             android:scaleType="centerCrop"
                             android:src="@drawable/default_image" />
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/itempage_imageView3"
                             android:layout_marginBottom="4dp"
                             android:layout_marginTop="12dp"
                             android:duplicateParentState="true"
                             android:orientation="vertical"
-                            android:paddingLeft="4dp"
-                            android:paddingRight="4dp">
+>
 
                             <View
                                 android:layout_width="match_parent"
@@ -402,6 +408,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="4dp"
                                 android:duplicateParentState="true"
+                                android:paddingLeft="4dp"
+                                android:paddingRight="0dp"
                                 android:gravity="center"
                                 android:singleLine="true"
                                 android:text="Házikészitésü hangfal eladó"
@@ -418,6 +426,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right"
                                 android:duplicateParentState="true"
+                                android:paddingLeft="0dp"
+                                android:paddingRight="4dp"
                                 android:text="25000 HUF"
                                 android:textColor="@android:color/holo_blue_light"
                                 android:textSize="15sp" />

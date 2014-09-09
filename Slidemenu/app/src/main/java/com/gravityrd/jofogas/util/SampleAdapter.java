@@ -1,24 +1,25 @@
 package com.gravityrd.jofogas.util;
 
 import android.content.Context;
-import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gravityrd.jofogas.R;
 import com.gravityrd.jofogas.activities.SingleItemActivity;
 import com.gravityrd.jofogas.activities.StaggeredListActivity;
 import com.gravityrd.jofogas.model.GravityProduct;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SampleAdapter extends BaseAdapter {
+    DisplayImageOptions options = new DisplayImageOptions.Builder().bitmapConfig(Bitmap.Config.RGB_565).imageScaleType(ImageScaleType.IN_SAMPLE_INT).build();
     protected ImageLoader imageLoader = ImageLoader.getInstance();
     Context context;
     LayoutInflater inflater;
@@ -54,7 +55,7 @@ public class SampleAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.row_grid_item, null);
             holder.titleProduct = (TextView) convertView.findViewById(R.id.title);
             holder.priceProduct = (TextView) convertView.findViewById(R.id.description);
-            holder.imageProduct = (ImageView) convertView.findViewById(R.id.imgView);
+            holder.imageProduct = (DynamicHImageView) convertView.findViewById(R.id.imgView);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -65,7 +66,7 @@ public class SampleAdapter extends BaseAdapter {
         holder.priceProduct.setText(item.getProductPrice() + "HUF");
 
         String tempImg = item.getProductImageUrl();
-        imageLoader.displayImage(tempImg, holder.imageProduct);
+        imageLoader.displayImage(tempImg, holder.imageProduct,options);
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +80,6 @@ public class SampleAdapter extends BaseAdapter {
     public class ViewHolder {
         TextView titleProduct;
         TextView priceProduct;
-        ImageView imageProduct;
+        DynamicHImageView imageProduct;
     }
 }

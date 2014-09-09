@@ -41,6 +41,8 @@ public class Search {
         auto.requestFocus();
     }
 
+
+
     private static class SearchSuggestions {
         public GravityProduct item;
 
@@ -56,6 +58,7 @@ public class Search {
 
     public void create(Menu menu, final Activity activity) {
         auto = (AutoCompleteTextView) menu.findItem(R.id.menu_search).getActionView();
+
         auto.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -96,6 +99,7 @@ public class Search {
             @Override
             public void onFocusChange(View view, boolean b) {
                 handleKeyboard(view, b);
+
             }
         });
         auto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -109,6 +113,7 @@ public class Search {
             }
         });
 
+
         add(null, activity);
     }
 
@@ -121,7 +126,7 @@ public class Search {
         } else {
             if (!isActive) return;
             isActive = false;
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
         }
     }
 
@@ -145,8 +150,8 @@ public class Search {
                     @Override
                     public void run() {
                         if(!isActive) return;
-                        ArrayAdapter<SearchSuggestions> adp = new ArrayAdapter<SearchSuggestions>(activity, android.R.layout.simple_dropdown_item_1line, res);
-                        adp.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+                        ArrayAdapter<SearchSuggestions> adp = new ArrayAdapter<SearchSuggestions>(activity, R.layout.custom_drop_down, res);
+                        adp.setDropDownViewResource(R.layout.custom_drop_down);
                         auto.setThreshold(1);
                         auto.setAdapter(adp);
                         auto.showDropDown();
@@ -174,5 +179,6 @@ public class Search {
 
         return suggestions;
     }
+
 
 }

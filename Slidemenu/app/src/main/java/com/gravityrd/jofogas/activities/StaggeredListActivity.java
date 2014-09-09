@@ -6,10 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.view.View;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -77,6 +74,38 @@ public class StaggeredListActivity extends BaseActivity {
         a.startActivity(i);
     }
 
+    public static void startVisitedAsync(final Activity a, final String scenarioName){
+        final Intent i = new Intent(App.getContext(), StaggeredListActivity.class);
+        final ProgressDialog progressDialog = new ProgressDialog(a);
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog.setTitle("Jófogás!");
+                progressDialog.setMessage("Tőltés folyamatban...");
+                progressDialog.setIndeterminate(false);
+                progressDialog.show();
+            }
+
+            @Override
+            protected Void doInBackground(Void... params) {
+                ArrayList<GravityProduct> result = new ArrayList<GravityProduct>();
+                try {
+                    result = Client.getVisitedDataFromServer(scenarioName, 50);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                i.putParcelableArrayListExtra(initialItemsMeta, result);
+                a.startActivity(i);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void result) {
+                progressDialog.dismiss();
+            }
+        }.execute();
+    }
     private SampleAdapter listAdapter;
 
     private enum Type {
