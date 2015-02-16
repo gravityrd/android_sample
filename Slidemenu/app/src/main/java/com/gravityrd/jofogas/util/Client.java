@@ -151,7 +151,8 @@ public class Client {
         if (category != null) values.add(new GravityNameValue("filter.categoryId", category));
         if (region != null) values.add(new GravityNameValue("Filter.neighborRegion", region));
         values.add(new GravityNameValue("searchString", text));
-        return getItemRecommendationFromServerWithKeyVale("MOBIL_LISTING", 50, values.toArray(new GravityNameValue[values.size()]));
+        //Ez itt MOBIL_LISTING szcenario volt ez az uj szcenario valamiert az adapter a listaba NPE-t ad, vagyis mintha nem kuldne vissza semmit
+        return getItemRecommendationFromServerWithKeyVale("MOBIL_SEARCH_KEY", 50, values.toArray(new GravityNameValue[values.size()]));
     }
 
     public static void sendEventAsync(final GravityEvent event) {

@@ -9,10 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.etsy.android.grid.util.DynamicHeightImageView;
 import com.gravityrd.jofogas.R;
 import com.gravityrd.jofogas.activities.SingleItemActivity;
 import com.gravityrd.jofogas.activities.StaggeredListActivity;
@@ -25,6 +22,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.gravityrd.jofogas.util.DynamicHImageView;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 public class HomeFragment extends Fragment {
@@ -33,11 +32,11 @@ public class HomeFragment extends Fragment {
     private List<GravityProduct> gravityProductList = null;
     private String[] categoryRecomandation = null;
 
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         final Fragment fragment = this;
         new AsyncTask<Void, Void, Void>() {
-
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();

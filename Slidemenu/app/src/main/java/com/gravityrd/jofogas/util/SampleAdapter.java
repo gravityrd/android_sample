@@ -77,6 +77,18 @@ public class SampleAdapter extends BaseAdapter {
         return convertView;
     }
 
+    public void refreshView(String pos){
+        ArrayList<GravityProduct> filterdCategoryList = null;
+        for(int i = 0; i < details.size();++i ){
+            if(pos == details.get(i).getProductItemType()){
+                filterdCategoryList.add(details.get(i));
+            }
+        }
+        details.clear();
+        details = filterdCategoryList;
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder {
         TextView titleProduct;
         TextView priceProduct;

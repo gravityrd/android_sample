@@ -5,6 +5,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -16,6 +18,7 @@ import android.widget.ListView;
 
 import com.gravityrd.jofogas.R;
 import com.gravityrd.jofogas.activities.StaggeredListActivity;
+import com.gravityrd.jofogas.fragments.DebugIdFragment;
 import com.gravityrd.jofogas.fragments.HomeFragment;
 import com.gravityrd.jofogas.fragments.LastVisitedFragment;
 import com.gravityrd.jofogas.model.NavDrawerItem;
@@ -30,11 +33,11 @@ public class SlideMenu {
     protected DrawerLayout layout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-
     public SlideMenu(Activity activity) {
         navMenuTitles = activity.getResources().getStringArray(R.array.nav_drawer_items);
         navMenuIcons = activity.getResources().obtainTypedArray(R.array.nav_drawer_icons);
         this.activity = activity;
+
         search = new Search(activity);
         drawSlideMenu();
     }
@@ -83,6 +86,8 @@ public class SlideMenu {
             case 1:
                StaggeredListActivity.startVisitedAsync(activity,"MOBIL_LAST_VISITED");
                 break;
+            case 2:
+                fragment = new DebugIdFragment();
             default:
                 break;
         }

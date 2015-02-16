@@ -2,11 +2,15 @@ package com.gravityrd.jofogas.activities;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -119,6 +123,7 @@ public class StaggeredListActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         StaggeredGridView mGridView = (StaggeredGridView) findViewById(R.id.grid_view);
         mGridView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -152,8 +157,30 @@ public class StaggeredListActivity extends BaseActivity {
             }
             items = bundle.getParcelableArrayList(initialItemsMeta);
         }
+
         categorySpinner = (Spinner) findViewById(R.id.category_spinerId);
-        categoryTypeFromSpinner = categorySpinner.getSelectedItemPosition();
+        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            int count = 0;
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String holder;
+                //categoryTypeFromSpinner = categorySpinner.getSelectedItemPosition();
+                Toast.makeText(getBaseContext(), categorySpinner.getSelectedItem().toString(),
+                        Toast.LENGTH_SHORT).show();
+                holder = Integer.toString(position);
+
+                if(count >= 1) {
+                    listAdapter.refreshView(holder);
+
+                }
+                count++;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                categorySpinner.setSelection(0);
+            }
+        });
 
         regionSpinner = (Spinner) findViewById(R.id.location_spinerId);
         listAdapter = new SampleAdapter(StaggeredListActivity.this, items);
@@ -162,6 +189,9 @@ public class StaggeredListActivity extends BaseActivity {
 
     }
 
+    private void categorySelector(String categoryId){
+        startCategoryAsync(this, categoryId);
+    }
 
     @Override
     protected int getView() {

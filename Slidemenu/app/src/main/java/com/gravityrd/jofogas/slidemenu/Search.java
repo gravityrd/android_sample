@@ -167,7 +167,7 @@ public class Search {
     private List<SearchSuggestions> suggestions(List<GravityProduct> items) {
         List<SearchSuggestions> suggestions = new ArrayList<SearchSuggestions>();
         Set<String> recommends = new LinkedHashSet<String>();
-        final int limit = 6;
+        final int limit = 20;
 
         for (GravityProduct i : items) {
             SearchSuggestions s = new SearchSuggestions(i);

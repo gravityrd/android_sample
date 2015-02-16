@@ -11,7 +11,7 @@ import android.util.AttributeSet;
  * Created by zsolt on 2014.08.11..
  */
 public class DynamicHImageView extends com.etsy.android.grid.util.DynamicHeightImageView {
-    public static float radius = 10.0f;
+    public static float radius = 5.0f;
     Path clipPath = new Path();
     RectF rect = new RectF(0, 0, this.getWidth(), this.getHeight());
 

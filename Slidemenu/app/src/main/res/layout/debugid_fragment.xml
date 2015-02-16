@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/list_divider">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_above="@+id/debugidtext"
+        android:textColor="@color/card_activated"
+        android:text="Az ön egyedi ID-ja:"/>
+    <TextView
+        android:id="@+id/debugidtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="DebugID"
+        android:textColor="@color/card_activated"
+        android:textSize="16dp" />
+
+    <ImageView
+        android:id="@+id/debugidicon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/debugidtext"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_favorites" />
+
+
+</RelativeLayout>

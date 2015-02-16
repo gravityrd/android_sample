@@ -49,6 +49,7 @@
     <string-array name="nav_drawer_items">
         <item>Home</item>
         <item>Last visited</item>
+        <item>Debug ID</item>
     </string-array>
 
     <!-- Nav Drawer List Item Icons -->
