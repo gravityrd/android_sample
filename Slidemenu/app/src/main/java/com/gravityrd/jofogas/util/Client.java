@@ -171,6 +171,11 @@ public class Client {
                 }
                 return null;
             }
+            
+            @Override
+            protected void onPostExecute(Void result) {
+                // You may want to override this method.
+            }
         }.execute();
     }
 
